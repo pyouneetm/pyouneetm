@@ -1,254 +1,184 @@
 <svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <style>
-            /* --- ANIMATIONS --- */
-            
-            @keyframes nt-pulse-neuron {
-                0%, 100% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(1.05); opacity: 0.8; }
+            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+
+            @keyframes fs-float {
+                0%, 100% { transform: translate(400px, 300px) rotate(0deg); }
+                50% { transform: translate(400px, 290px) rotate(1deg); }
             }
 
-            @keyframes nt-signal-fire {
-                0% { stroke-dashoffset: 100; opacity: 0; }
-                20% { opacity: 1; }
-                100% { stroke-dashoffset: -100; opacity: 0; }
+            @keyframes fs-pulse {
+                0%, 100% { filter: drop-shadow(0 0 5px #00f3ff); opacity: 1; }
+                50% { filter: drop-shadow(0 0 15px #00f3ff); opacity: 0.8; }
             }
 
-            @keyframes nt-float-network {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-10px); }
-            }
-
-            @keyframes nt-spin-slow {
+            @keyframes fs-spin {
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
             }
 
-            @keyframes nt-blink-data {
-                0%, 100% { opacity: 0.3; }
-                50% { opacity: 1; }
+            @keyframes fs-flow {
+                to { stroke-dashoffset: -20; }
             }
 
-            /* --- STYLES --- */
-            
-            .bg { fill: #050505; }
-            
-            /* Separated animation class. 
-               The parent group handles the centering (translate 400, 300).
-               This class handles the floating motion.
-            */
-            .network-animator {
-                animation: nt-float-network 8s ease-in-out infinite;
+            @keyframes fs-hover {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.1); }
             }
 
-            /* Axons (Connections) */
-            .axon-base {
-                fill: none;
-                stroke: #333;
+            @keyframes fs-core-layer {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-2px); }
+            }
+
+            .container {
+                animation: fs-float 8s ease-in-out infinite;
+                transform-origin: center;
+                transform-box: fill-box;
+            }
+
+            .bond {
+                stroke: #00f3ff;
+                stroke-width: 2;
+                stroke-dasharray: 4 4;
+                animation: fs-flow 1s linear infinite;
+                opacity: 0.4;
+            }
+
+            .bond-backend {
+                stroke: #bd00ff;
+                stroke-width: 2;
+                stroke-dasharray: 4 4;
+                animation: fs-flow 1.5s linear infinite;
+                opacity: 0.4;
+            }
+
+            .atom-fe {
+                fill: url(#grad-fe);
+                stroke: #00f3ff;
                 stroke-width: 1.5;
-                opacity: 0.5;
-            }
-
-            .axon-signal {
-                fill: none;
-                stroke-width: 3;
-                stroke-linecap: round;
-                stroke-dasharray: 20 200;
-                animation: nt-signal-fire 2s linear infinite;
-                filter: url(#nt-glow-signal);
-                opacity: 0.8;
-            }
-
-            /* Neurons (Nodes) */
-            .neuron-group {
-                cursor: pointer;
                 transition: transform 0.3s ease;
-                /* transform-box fixes origin issues in some browsers */
-                transform-box: fill-box;
-                transform-origin: center;
+                animation: fs-hover 4s ease-in-out infinite;
+                cursor: pointer;
             }
-            .neuron-group:hover { transform: scale(1.1); }
-            
-            .neuron-core {
-                fill: #000;
-                stroke-width: 2;
-                filter: url(#nt-glow-soft);
+            .atom-fe:hover { transform: scale(1.2); stroke: #fff; }
+
+            .atom-be {
+                fill: url(#grad-be);
+                stroke: #bd00ff;
+                stroke-width: 1.5;
+                transition: transform 0.3s ease;
+                animation: fs-hover 5s ease-in-out infinite;
+                cursor: pointer;
             }
-            
-            .neuron-ring {
-                fill: none;
+            .atom-be:hover { transform: scale(1.2); stroke: #fff; }
+
+            .core-layer {
+                fill: url(#grad-core);
+                stroke: #fff;
                 stroke-width: 1;
-                stroke-dasharray: 5 5;
-                opacity: 0.6;
-                animation: nt-spin-slow 10s linear infinite;
-                transform-box: fill-box;
-                transform-origin: center;
+                animation: fs-core-layer 3s ease-in-out infinite;
             }
 
-            /* Central Hub */
-            .hub-core {
-                fill: url(#nt-grad-hub);
-                stroke: #00ff9d;
-                stroke-width: 2;
-                filter: url(#nt-glow-strong);
-                animation: nt-pulse-neuron 3s infinite ease-in-out;
-                transform-box: fill-box;
-                transform-origin: center;
-            }
-
-            /* Text */
-            .label-main {
-                font-family: 'JetBrains Mono', 'Courier New', monospace;
-                font-size: 14px;
+            .txt {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 11px;
                 font-weight: 700;
                 fill: #fff;
                 text-anchor: middle;
                 dominant-baseline: middle;
                 pointer-events: none;
-                text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+                text-shadow: 0 2px 4px rgba(0,0,0,1);
             }
 
-            .label-sub {
-                font-family: 'JetBrains Mono', 'Courier New', monospace;
-                font-size: 10px;
-                fill: #888;
-                text-anchor: middle;
-                opacity: 0;
-                transition: opacity 0.3s;
-            }
-            .neuron-group:hover .label-sub { opacity: 1; }
-
-            .hud-text {
-                font-family: 'JetBrains Mono', 'Courier New', monospace;
-                font-size: 12px;
-                fill: #00ff9d;
-                opacity: 0.6;
-                letter-spacing: 2px;
-            }
-
-            .circuit-line {
-                stroke: #1a1a1a;
-                stroke-width: 2;
+            .ring {
                 fill: none;
+                stroke: #fff;
+                stroke-width: 0.5;
+                opacity: 0.1;
+                transform-origin: center;
+                transform-box: fill-box;
+                animation: fs-spin 20s linear infinite;
             }
 
+            .grid { stroke: #222; stroke-width: 0.5; }
         </style>
 
-        <!-- FILTERS & GRADIENTS (Namespaced) -->
-        <filter id="nt-glow-strong" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-
-        <filter id="nt-glow-soft" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-
-        <filter id="nt-glow-signal" x="-50%" y="-50%" width="200%" height="200%">
-             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-             <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-
-        <radialGradient id="nt-grad-hub" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#003322"/>
-            <stop offset="100%" stop-color="#00ff9d" stop-opacity="0.2"/>
-        </radialGradient>
-        
-        <radialGradient id="nt-grad-web" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#001122"/>
-            <stop offset="100%" stop-color="#00f3ff" stop-opacity="0.2"/>
+        <radialGradient id="grad-fe" cx="30%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#004455"/>
+            <stop offset="100%" stop-color="#00111a"/>
         </radialGradient>
 
-        <pattern id="nt-circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-             <path d="M10 10 L40 10 L40 40" class="circuit-line" />
-             <path d="M60 60 L90 60 L90 90" class="circuit-line" />
-             <circle cx="40" cy="40" r="2" fill="#1a1a1a"/>
-             <circle cx="90" cy="90" r="2" fill="#1a1a1a"/>
+        <radialGradient id="grad-be" cx="30%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#440055"/>
+            <stop offset="100%" stop-color="#1a001a"/>
+        </radialGradient>
+
+        <linearGradient id="grad-core" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#888888"/>
+        </linearGradient>
+
+        <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#050505" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.9"/>
+        </radialGradient>
+
+        <pattern id="pat-grid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" class="grid"/>
         </pattern>
     </defs>
 
-    <!-- BACKGROUND LAYER -->
-    <rect width="100%" height="100%" class="bg" />
-    <rect width="100%" height="100%" fill="url(#nt-circuit-pattern)" opacity="0.3"/>
-    
-    <!-- HUD ELEMENTS -->
-    <text x="30" y="40" class="hud-text">SYS.NEURAL_TOPOLOGY [ONLINE]</text>
-    <line x1="30" y1="50" x2="250" y2="50" stroke="#00ff9d" stroke-width="1" opacity="0.3"/>
-    
-    <!-- MAIN NETWORK WRAPPER -->
-    <!-- 1. Outer Group: Handles Static Centering (Adjusted for 600px Height) -->
-    <g transform="translate(400, 300)">
+    <rect width="100%" height="100%" fill="#050505"/>
+    <rect width="100%" height="100%" fill="url(#pat-grid)" opacity="0.3"/>
+    <rect width="100%" height="100%" fill="url(#vignette)"/>
+
+    <text x="30" y="40" font-family="'JetBrains Mono', monospace" fill="#fff" font-size="12" opacity="0.5" letter-spacing="2">FULL_STACK_ARCH.SYS</text>
+
+    <g class="container">
         
-        <!-- 2. Inner Group: Handles Floating Animation -->
-        <g class="network-animator">
-            
-            <!-- CONNECTIONS (Axons) -->
-            <!-- Core to Web (Top Left) -->
-            <path d="M0,0 C-50,-50 -100,-100 -200,-120" class="axon-base" />
-            <path d="M0,0 C-50,-50 -100,-100 -200,-120" class="axon-signal" stroke="#00f3ff" style="animation-duration: 2s;" />
+        <circle r="180" class="ring" />
+        <circle r="140" class="ring" style="animation-direction: reverse; animation-duration: 25s; opacity: 0.15;" />
+        <circle r="240" class="ring" style="opacity: 0.05; stroke-dasharray: 10 30;" />
 
-            <!-- Core to Game (Top Right) -->
-            <path d="M0,0 C50,-50 100,-100 200,-120" class="axon-base" />
-            <path d="M0,0 C50,-50 100,-100 200,-120" class="axon-signal" stroke="#ff0055" style="animation-duration: 2.5s; animation-delay: 0.5s;" />
+        <line x1="0" y1="0" x2="120" y2="-80" class="bond" />
+        <line x1="0" y1="0" x2="-120" y2="-80" class="bond" />
+        <line x1="0" y1="0" x2="-140" y2="0" class="bond" />
+        
+        <line x1="0" y1="0" x2="120" y2="80" class="bond-backend" />
+        <line x1="0" y1="0" x2="-120" y2="80" class="bond-backend" />
 
-            <!-- Core to DB (Bottom Left) -->
-            <path d="M0,0 C-30,50 -80,100 -200,120" class="axon-base" />
-            <path d="M0,0 C-30,50 -80,100 -200,120" class="axon-signal" stroke="#ffee00" style="animation-duration: 3s; animation-delay: 0.2s;" />
+        <g transform="translate(0, 10)">
+            <ellipse cx="0" cy="10" rx="35" ry="10" class="core-layer" style="fill:#333; animation-delay: 0s;"/>
+            <ellipse cx="0" cy="0" rx="35" ry="10" class="core-layer" style="fill:#555; animation-delay: 0.2s;"/>
+            <ellipse cx="0" cy="-10" rx="35" ry="10" class="core-layer" style="fill:#fff; animation-delay: 0.4s;"/>
+            <path d="M-35,-10 L-35,10 C-35,15 35,15 35,10 L35,-10" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.5"/>
+        </g>
 
-            <!-- Core to API (Bottom Right) -->
-            <path d="M0,0 C30,50 80,100 200,120" class="axon-base" />
-            <path d="M0,0 C30,50 80,100 200,120" class="axon-signal" stroke="#bc13fe" style="animation-duration: 2.2s; animation-delay: 1s;" />
+        <g transform="translate(120, -80)">
+            <circle r="32" class="atom-fe" />
+            <text class="txt">REACT</text>
+        </g>
 
+        <g transform="translate(-120, -80)">
+            <circle r="32" class="atom-fe" />
+            <text class="txt">JS/TS</text>
+        </g>
+        
+        <g transform="translate(-140, 0)">
+            <circle r="32" class="atom-fe" />
+            <text class="txt">GLSL</text>
+        </g>
 
-            <!-- NODES -->
+        <g transform="translate(120, 80)">
+            <circle r="32" class="atom-be" />
+            <text class="txt">NODE</text>
+        </g>
 
-            <!-- HUB (Center) -->
-            <g class="neuron-group">
-                <circle r="40" class="hub-core" />
-                <circle r="55" class="neuron-ring" stroke="#00ff9d" />
-                <circle r="65" class="neuron-ring" stroke="#00ff9d" style="animation-direction: reverse; animation-duration: 15s; stroke-dasharray: 10 10; opacity: 0.3;" />
-                <text class="label-main">CORE</text>
-                <text y="20" class="label-sub">LOGIC UNIT</text>
-            </g>
-
-            <!-- WEB (Top Left) -->
-            <g class="neuron-group" transform="translate(-200, -120)">
-                <circle r="30" class="neuron-core" stroke="#00f3ff" fill="url(#nt-grad-web)"/>
-                <circle r="38" class="neuron-ring" stroke="#00f3ff" />
-                <text class="label-main">WEB</text>
-                <text y="18" class="label-sub">FRONTEND</text>
-            </g>
-
-            <!-- GAME (Top Right) -->
-            <g class="neuron-group" transform="translate(200, -120)">
-                <circle r="30" class="neuron-core" stroke="#ff0055" fill="#1a050a"/>
-                <circle r="38" class="neuron-ring" stroke="#ff0055" />
-                <text class="label-main">GAME</text>
-                <text y="18" class="label-sub">ENGINE</text>
-            </g>
-
-            <!-- DB (Bottom Left) -->
-            <g class="neuron-group" transform="translate(-200, 120)">
-                <circle r="30" class="neuron-core" stroke="#ffee00" fill="#1a1a05"/>
-                <circle r="38" class="neuron-ring" stroke="#ffee00" />
-                <text class="label-main">DB</text>
-                <text y="18" class="label-sub">STORAGE</text>
-            </g>
-
-            <!-- API (Bottom Right) -->
-            <g class="neuron-group" transform="translate(200, 120)">
-                <circle r="30" class="neuron-core" stroke="#bc13fe" fill="#15051a"/>
-                <circle r="38" class="neuron-ring" stroke="#bc13fe" />
-                <text class="label-main">API</text>
-                <text y="18" class="label-sub">GATEWAY</text>
-            </g>
+        <g transform="translate(-120, 80)">
+            <circle r="32" class="atom-be" />
+            <text class="txt">PY</text>
         </g>
     </g>
-
-    <!-- Decorative Data Particles -->
-    <circle cx="100" cy="100" r="2" fill="#fff" opacity="0.5" style="animation: nt-blink-data 2s infinite" />
-    <circle cx="700" cy="400" r="2" fill="#fff" opacity="0.5" style="animation: nt-blink-data 3s infinite" />
-    <circle cx="50" cy="400" r="2" fill="#fff" opacity="0.5" style="animation: nt-blink-data 1.5s infinite" />
-
 </svg>
