@@ -1,51 +1,257 @@
+<svg width="900" height="300" viewBox="0 0 900 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;display=swap');
 
-            <svg width="900" height="250" viewBox="0 0 900 250" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <style>
-                    .bg-term { fill: #050505; stroke: #222; }
-                    .font-code { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #666; }
-                    .highlight { fill: #00f3ff; text-shadow: 0 0 5px #00f3ff; }
-                    .bio-warn { fill: #ff0055; }
-                    .success { fill: #00ff9d; }
-                    
-                    @keyframes scroll-up {
-                        0% { transform: translateY(0); }
-                        100% { transform: translateY(-140px); }
-                    }
-                    .feed { animation: scroll-up 12s linear infinite; }
-                    
-                    @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-                    .cursor { animation: cursor-blink 1s step-end infinite; fill: #00f3ff; }
-                </style>
-                <rect x="2" y="2" width="896" height="246" rx="4" class="bg-term" />
-                
-                <!-- Header Bar -->
-                <rect x="2" y="2" width="896" height="24" rx="4" fill="#111" />
-                <circle cx="20" cy="14" r="4" fill="#ff5f56" />
-                <circle cx="35" cy="14" r="4" fill="#ffbd2e" />
-                <circle cx="50" cy="14" r="4" fill="#27c93f" />
-                <text x="70" y="18" font-family="monospace" font-size="10" fill="#555">root@pyouneetm-lab:~/research</text>
+            /* --- ANIMATIONS --- */
+            
+            @keyframes term-scroll {
+                0% { transform: translateY(0); opacity: 1; }
+                100% { transform: translateY(-240px); opacity: 1; }
+            }
 
-                <g clip-path="url(#term-clip)">
-                    <g transform="translate(20, 50)" class="feed font-code">
-                        <text y="0">> initializing cognitive architecture...</text>
-                        <text y="20">> loading neural modules: <tspan class="highlight">REACT.js</tspan>, <tspan class="highlight">THREE.js</tspan></text>
-                        <text y="40">> compiling GLSL shaders... <tspan class="success">[COMPILED]</tspan></text>
-                        <text y="60">> connecting to Discord API via Lanyard... <tspan class="highlight">CONNECTED</tspan></text>
-                        <text y="80">> analyzing 'CosmicDodge' physics engine...</text>
-                        <text y="100">> <tspan class="bio-warn">ALERT: DOPAMINE LEVELS INCREASING</tspan></text>
-                        <text y="120">> synthesizing audio waves (Tone.js)...</text>
-                        <text y="140">> calculating orbital trajectories...</text>
-                        <text y="160">> fetching research papers...</text>
-                        <text y="180">> git commit -m "optimize entropy"</text>
-                        <text y="200">> system status: <tspan class="highlight">FLOW_STATE</tspan></text>
-                        <text y="220">> waiting for neural input...</text>
-                         <text y="240">> _</text>
-                    </g>
-                </g>
-                <defs>
-                    <clipPath id="term-clip"><rect x="0" y="30" width="900" height="200" /></clipPath>
-                </defs>
-                
-                <!-- Overlay static text -->
-                <text x="20" y="230" class="font-code" fill="#fff">> _ <tspan class="cursor">█</tspan></text>
-            </svg>
+            @keyframes aurora-flow {
+                0% { transform: translate(0, 0) scale(1); }
+                50% { transform: translate(-20px, -20px) scale(1.1); }
+                100% { transform: translate(0, 0) scale(1); }
+            }
+
+            @keyframes glow-pulse {
+                0%, 100% { filter: drop-shadow(0 0 2px currentColor); opacity: 0.8; }
+                50% { filter: drop-shadow(0 0 8px currentColor); opacity: 1; }
+            }
+
+            @keyframes cursor-blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+
+            @keyframes scanline-move {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(300px); }
+            }
+
+            @keyframes border-shimmer {
+                0% { stroke-dashoffset: 1000; opacity: 0.2; }
+                50% { opacity: 0.8; }
+                100% { stroke-dashoffset: 0; opacity: 0.2; }
+            }
+
+            /* --- STYLES --- */
+            
+            .font-code { 
+                font-family: 'Fira Code', 'JetBrains Mono', monospace; 
+                font-size: 13px; 
+                font-weight: 500;
+                letter-spacing: 0.5px;
+            }
+
+            /* Syntax Highlighting Colors */
+            .c-comment { fill: #6c7986; font-style: italic; }
+            .c-keyword { fill: #ff79c6; filter: url(#glow-pink); }
+            .c-func { fill: #8be9fd; filter: url(#glow-cyan); }
+            .c-string { fill: #f1fa8c; }
+            .c-var { fill: #f8f8f2; }
+            .c-operator { fill: #ffb86c; }
+            .c-success { fill: #50fa7b; font-weight: 700; filter: url(#glow-green); }
+            .c-class { fill: #bd93f9; }
+
+            /* Terminal Window */
+            .window-bg { 
+                fill: rgba(15, 15, 25, 0.85); 
+                stroke: rgba(255, 255, 255, 0.1); 
+                stroke-width: 1;
+            }
+
+            .glass-reflection {
+                fill: url(#grad-reflection);
+                opacity: 0.1;
+                pointer-events: none;
+            }
+
+            .border-anim {
+                fill: none;
+                stroke: url(#grad-border);
+                stroke-width: 2;
+                stroke-dasharray: 200 400;
+                animation: border-shimmer 6s linear infinite;
+            }
+
+            /* Aurora Background */
+            .aurora-blob {
+                filter: blur(40px);
+                opacity: 0.4;
+                animation: aurora-flow 10s ease-in-out infinite;
+                mix-blend-mode: screen;
+            }
+
+            /* Text Feed */
+            .feed-container {
+                animation: term-scroll 20s linear infinite;
+            }
+
+            .cursor-block {
+                fill: #bd93f9;
+                animation: cursor-blink 1s step-end infinite;
+            }
+
+            /* UI Elements */
+            .status-bar {
+                fill: rgba(40, 42, 54, 0.9);
+                stroke-top: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .header-bar {
+                fill: rgba(40, 42, 54, 0.95);
+            }
+
+            .scanline {
+                fill: url(#grad-scan);
+                opacity: 0.1;
+                animation: scanline-move 8s linear infinite;
+                pointer-events: none;
+            }
+
+        </style>
+
+        <!-- FILTERS & GRADIENTS -->
+        <filter id="glow-pink"><feGaussianBlur stdDeviation="1.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-cyan"><feGaussianBlur stdDeviation="1.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="glow-green"><feGaussianBlur stdDeviation="1.5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        
+        <linearGradient id="grad-reflection" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.2"/>
+            <stop offset="50%" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0.1"/>
+        </linearGradient>
+
+        <linearGradient id="grad-border" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff79c6"/>
+            <stop offset="50%" stop-color="#8be9fd"/>
+            <stop offset="100%" stop-color="#50fa7b"/>
+        </linearGradient>
+
+        <linearGradient id="grad-scan" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#fff" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+        </linearGradient>
+
+        <clipPath id="screen-clip">
+            <rect x="2" y="32" width="896" height="236" />
+        </clipPath>
+    </defs>
+
+    <!-- 1. CREATIVE VOID BACKGROUND -->
+    <rect width="100%" height="100%" fill="#050510" rx="6" />
+    
+    <!-- Aurora Blobs (The "Creative Mind") -->
+    <circle cx="200" cy="100" r="100" fill="#bd93f9" class="aurora-blob" />
+    <circle cx="700" cy="200" r="120" fill="#ff79c6" class="aurora-blob" style="animation-delay: -5s" />
+    <circle cx="450" cy="150" r="80" fill="#8be9fd" class="aurora-blob" style="animation-delay: -2s" />
+
+    <!-- 2. TERMINAL WINDOW GLASS -->
+    <rect x="2" y="2" width="896" height="296" rx="6" class="window-bg" />
+    <!-- Reflection Glint -->
+    <path d="M2,2 L900,2 L900,150 L2,20 Z" class="glass-reflection" />
+    <!-- Animated RGB Border -->
+    <rect x="2" y="2" width="896" height="296" rx="6" class="border-anim" />
+
+    <!-- 3. HEADER BAR -->
+    <path d="M2,8 Q2,2 8,2 L892,2 Q898,2 898,8 L898,32 L2,32 Z" class="header-bar" />
+    <!-- Window Controls -->
+    <circle cx="20" cy="17" r="5" fill="#ff5555" />
+    <circle cx="40" cy="17" r="5" fill="#f1fa8c" />
+    <circle cx="60" cy="17" r="5" fill="#50fa7b" />
+    <!-- Title -->
+    <text x="450" y="21" font-family="monospace" font-size="11" fill="#6272a4" text-anchor="middle">~/art/canvas.tsx — pyouneetm-lab</text>
+
+    <!-- 4. CODE CONTENT -->
+    <g clip-path="url(#screen-clip)">
+        <g transform="translate(30, 60)" class="feed-container">
+            
+            <!-- Line 1 -->
+            <text x="0" y="0" class="font-code">
+                <tspan class="c-comment">// Initializing creative runtime environment...</tspan>
+            </text>
+
+            <!-- Line 2 -->
+            <text x="0" y="25" class="font-code">
+                <tspan class="c-keyword">import</tspan> { <tspan class="c-class">Imagination</tspan>, <tspan class="c-class">Logic</tspan> } <tspan class="c-keyword">from</tspan> <tspan class="c-string">'@brain/cortex'</tspan>;
+            </text>
+
+            <!-- Line 3 -->
+            <text x="0" y="50" class="font-code">
+                <tspan class="c-keyword">const</tspan> <tspan class="c-func">createMasterpiece</tspan> <tspan class="c-operator">=</tspan> <tspan class="c-keyword">async</tspan> () <tspan class="c-operator">=></tspan> {
+            </text>
+
+            <!-- Line 4 -->
+            <text x="0" y="75" class="font-code">
+                <tspan x="20">await</tspan> <tspan class="c-func">loadModules</tspan>([<tspan class="c-string">'React'</tspan>, <tspan class="c-string">'WebGL'</tspan>, <tspan class="c-string">'Tone.js'</tspan>]);
+            </text>
+
+            <!-- Line 5 -->
+            <text x="0" y="100" class="font-code">
+                <tspan x="20" class="c-comment">/* Compiling shaders into visual poetry... */</tspan>
+            </text>
+
+            <!-- Line 6 -->
+            <text x="0" y="125" class="font-code">
+                <tspan x="20" class="c-keyword">if</tspan> (<tspan class="c-var">inspiration</tspan> <tspan class="c-operator">></tspan> 9000) {
+            </text>
+
+            <!-- Line 7 -->
+            <text x="0" y="150" class="font-code">
+                <tspan x="40" class="c-func">enterFlowState</tspan>();
+            </text>
+
+            <!-- Line 8 -->
+            <text x="0" y="175" class="font-code">
+                <tspan x="40" class="c-class">System</tspan>.<tspan class="c-func">log</tspan>(<tspan class="c-string">"Art Synthesized Successfully"</tspan>);
+            </text>
+
+            <!-- Line 9 -->
+            <text x="0" y="200" class="font-code">
+                <tspan x="40" class="c-keyword">return</tspan> <tspan class="c-success">new Reality()</tspan>;
+            </text>
+
+            <!-- Line 10 -->
+            <text x="0" y="225" class="font-code">
+                <tspan x="20">}</tspan>
+            </text>
+
+            <!-- Line 11 -->
+            <text x="0" y="250" class="font-code">
+                <tspan x="0">};</tspan>
+            </text>
+
+            <!-- Line 12 -->
+            <text x="0" y="275" class="font-code">
+                <tspan x="0" class="c-func">createMasterpiece</tspan>();
+            </text>
+             
+             <!-- Line 13 -->
+            <text x="0" y="300" class="font-code">
+                <tspan x="0" class="c-comment">/* Rendering output to viewport... */</tspan>
+            </text>
+
+            <!-- Line 14 -->
+            <text x="0" y="325" class="font-code">
+                <tspan x="0" class="c-success">>> BUILD SUCCESSFUL [42ms]</tspan>
+            </text>
+
+        </g>
+    </g>
+
+    <!-- 5. ACTIVE INPUT LINE (Fixed at bottom) -->
+    <rect x="2" y="260" width="896" height="38" fill="rgba(20,20,30,0.8)" />
+    <text x="30" y="285" class="font-code">
+        <tspan class="c-keyword">➜</tspan> <tspan class="c-var">~/pyouneetm-lab</tspan> <tspan class="c-operator">git</tspan> commit -m <tspan class="c-string">"refactor: reality"</tspan>
+    </text>
+    <rect x="420" y="272" width="10" height="18" class="cursor-block" />
+
+    <!-- 6. SCANLINE OVERLAY -->
+    <rect width="100%" height="20%" class="scanline" />
+
+</svg>
