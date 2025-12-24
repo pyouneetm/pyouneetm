@@ -3,182 +3,216 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
 
-            @keyframes fs-float {
+            @keyframes sys-float {
                 0%, 100% { transform: translate(400px, 300px) rotate(0deg); }
                 50% { transform: translate(400px, 290px) rotate(1deg); }
             }
 
-            @keyframes fs-pulse {
-                0%, 100% { filter: drop-shadow(0 0 5px #00f3ff); opacity: 1; }
-                50% { filter: drop-shadow(0 0 15px #00f3ff); opacity: 0.8; }
+            @keyframes sys-pulse {
+                0%, 100% { opacity: 0.5; stroke-width: 1; }
+                50% { opacity: 1; stroke-width: 2; }
             }
 
-            @keyframes fs-spin {
+            @keyframes sys-spin {
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
             }
 
-            @keyframes fs-flow {
+            @keyframes bond-flow {
                 to { stroke-dashoffset: -20; }
             }
 
-            @keyframes fs-hover {
-                0%, 100% { transform: scale(1); }
-                50% { transform: scale(1.1); }
+            @keyframes atom-breathe {
+                0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,243,255,0.5)); }
+                50% { transform: scale(1.05); filter: drop-shadow(0 0 15px rgba(0,243,255,0.8)); }
             }
 
-            @keyframes fs-core-layer {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-2px); }
+            @keyframes particle-drift {
+                0% { transform: translateY(0) scale(1); opacity: 0; }
+                50% { opacity: 0.5; }
+                100% { transform: translateY(-100px) scale(0); opacity: 0; }
             }
 
-            .container {
-                animation: fs-float 8s ease-in-out infinite;
+            .scene {
+                animation: sys-float 8s ease-in-out infinite;
                 transform-origin: center;
                 transform-box: fill-box;
             }
 
-            .bond {
-                stroke: #00f3ff;
-                stroke-width: 2;
-                stroke-dasharray: 4 4;
-                animation: fs-flow 1s linear infinite;
-                opacity: 0.4;
-            }
-
-            .bond-backend {
-                stroke: #bd00ff;
-                stroke-width: 2;
-                stroke-dasharray: 4 4;
-                animation: fs-flow 1.5s linear infinite;
-                opacity: 0.4;
-            }
-
-            .atom-fe {
-                fill: url(#grad-fe);
-                stroke: #00f3ff;
-                stroke-width: 1.5;
-                transition: transform 0.3s ease;
-                animation: fs-hover 4s ease-in-out infinite;
-                cursor: pointer;
-            }
-            .atom-fe:hover { transform: scale(1.2); stroke: #fff; }
-
-            .atom-be {
-                fill: url(#grad-be);
-                stroke: #bd00ff;
-                stroke-width: 1.5;
-                transition: transform 0.3s ease;
-                animation: fs-hover 5s ease-in-out infinite;
-                cursor: pointer;
-            }
-            .atom-be:hover { transform: scale(1.2); stroke: #fff; }
-
-            .core-layer {
-                fill: url(#grad-core);
-                stroke: #fff;
+            .bond-path {
                 stroke-width: 1;
-                animation: fs-core-layer 3s ease-in-out infinite;
+                stroke-opacity: 0.3;
+                fill: none;
             }
 
-            .txt {
+            .bond-energy {
+                stroke-width: 2;
+                stroke-linecap: round;
+                stroke-dasharray: 4 20;
+                animation: bond-flow 1s linear infinite;
+                fill: none;
+            }
+
+            .atom-glass {
+                fill: rgba(10, 10, 15, 0.7);
+                stroke-width: 1.5;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+            
+            .atom-glass:hover {
+                fill: rgba(20, 30, 40, 0.9);
+                stroke-width: 2;
+                filter: url(#bloom);
+            }
+
+            .atom-fe { stroke: #00f3ff; animation: atom-breathe 4s infinite; }
+            .atom-be { stroke: #ff0055; animation: atom-breathe 5s infinite; }
+
+            .atom-highlight {
+                fill: url(#glass-shine);
+                opacity: 0.4;
+                pointer-events: none;
+            }
+
+            .core-plate {
+                fill: rgba(255, 255, 255, 0.05);
+                stroke: #fff;
+                stroke-width: 0.5;
+            }
+
+            .txt-label {
                 font-family: 'JetBrains Mono', monospace;
-                font-size: 11px;
+                font-size: 10px;
                 font-weight: 700;
                 fill: #fff;
                 text-anchor: middle;
                 dominant-baseline: middle;
                 pointer-events: none;
-                text-shadow: 0 2px 4px rgba(0,0,0,1);
+                text-shadow: 0 0 5px rgba(0,0,0,1);
             }
 
-            .ring {
+            .orbit-line {
                 fill: none;
                 stroke: #fff;
                 stroke-width: 0.5;
-                opacity: 0.1;
-                transform-origin: center;
-                transform-box: fill-box;
-                animation: fs-spin 20s linear infinite;
+                stroke-opacity: 0.1;
+                vector-effect: non-scaling-stroke;
             }
 
-            .grid { stroke: #222; stroke-width: 0.5; }
+            .bg-hex { stroke: #1a1a1a; stroke-width: 1; fill: none; }
+            
+            .particle { fill: #fff; animation: particle-drift 10s infinite linear; }
         </style>
 
-        <radialGradient id="grad-fe" cx="30%" cy="30%" r="80%">
-            <stop offset="0%" stop-color="#004455"/>
-            <stop offset="100%" stop-color="#00111a"/>
-        </radialGradient>
+        <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
 
-        <radialGradient id="grad-be" cx="30%" cy="30%" r="80%">
-            <stop offset="0%" stop-color="#440055"/>
-            <stop offset="100%" stop-color="#1a001a"/>
-        </radialGradient>
-
-        <linearGradient id="grad-core" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="100%" stop-color="#888888"/>
+        <linearGradient id="glass-shine" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.8"/>
+            <stop offset="50%" stop-color="#fff" stop-opacity="0.1"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
         </linearGradient>
 
-        <radialGradient id="vignette" cx="50%" cy="50%" r="60%">
-            <stop offset="0%" stop-color="#050505" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#000000" stop-opacity="0.9"/>
+        <radialGradient id="grad-glow-fe" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
         </radialGradient>
 
-        <pattern id="pat-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-            <path d="M 30 0 L 0 0 0 30" fill="none" class="grid"/>
+        <radialGradient id="grad-glow-be" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ff0055" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#ff0055" stop-opacity="0"/>
+        </radialGradient>
+
+        <radialGradient id="vignette-rad" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stop-color="#050505" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="1"/>
+        </radialGradient>
+
+        <pattern id="hex-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+             <path d="M20 0 L40 10 L40 30 L20 40 L0 30 L0 10 Z" class="bg-hex"/>
         </pattern>
     </defs>
 
-    <rect width="100%" height="100%" fill="#050505"/>
-    <rect width="100%" height="100%" fill="url(#pat-grid)" opacity="0.3"/>
-    <rect width="100%" height="100%" fill="url(#vignette)"/>
+    <rect width="100%" height="100%" fill="#020202"/>
+    <rect width="100%" height="100%" fill="url(#hex-grid)" opacity="0.15"/>
+    
+    <circle cx="100" cy="500" r="1" class="particle" style="animation-delay: 0s" />
+    <circle cx="700" cy="550" r="1.5" class="particle" style="animation-delay: 2s" />
+    <circle cx="300" cy="580" r="1" class="particle" style="animation-delay: 4s" />
+    <circle cx="600" cy="400" r="1" class="particle" style="animation-delay: 1s" />
 
-    <text x="30" y="40" font-family="'JetBrains Mono', monospace" fill="#fff" font-size="12" opacity="0.5" letter-spacing="2">FULL_STACK_ARCH.SYS</text>
+    <rect width="100%" height="100%" fill="url(#vignette-rad)"/>
 
-    <g class="container">
+    <text x="40" y="40" font-family="'JetBrains Mono', monospace" fill="#fff" font-size="10" opacity="0.3" letter-spacing="2">SYS.ARCH_V4.0 // CONNECTED</text>
+
+    <g class="scene">
         
-        <circle r="180" class="ring" />
-        <circle r="140" class="ring" style="animation-direction: reverse; animation-duration: 25s; opacity: 0.15;" />
-        <circle r="240" class="ring" style="opacity: 0.05; stroke-dasharray: 10 30;" />
+        <circle r="200" class="orbit-line" style="animation: sys-spin 60s linear infinite" stroke-dasharray="2 10" />
+        <circle r="280" class="orbit-line" style="animation: sys-spin 40s linear infinite reverse; opacity: 0.05;" stroke-dasharray="20 20" />
 
-        <line x1="0" y1="0" x2="120" y2="-80" class="bond" />
-        <line x1="0" y1="0" x2="-120" y2="-80" class="bond" />
-        <line x1="0" y1="0" x2="-140" y2="0" class="bond" />
-        
-        <line x1="0" y1="0" x2="120" y2="80" class="bond-backend" />
-        <line x1="0" y1="0" x2="-120" y2="80" class="bond-backend" />
+        <line x1="0" y1="0" x2="130" y2="-90" class="bond-path" stroke="#00f3ff"/>
+        <line x1="0" y1="0" x2="130" y2="-90" class="bond-energy" stroke="#00f3ff" />
 
-        <g transform="translate(0, 10)">
-            <ellipse cx="0" cy="10" rx="35" ry="10" class="core-layer" style="fill:#333; animation-delay: 0s;"/>
-            <ellipse cx="0" cy="0" rx="35" ry="10" class="core-layer" style="fill:#555; animation-delay: 0.2s;"/>
-            <ellipse cx="0" cy="-10" rx="35" ry="10" class="core-layer" style="fill:#fff; animation-delay: 0.4s;"/>
-            <path d="M-35,-10 L-35,10 C-35,15 35,15 35,10 L35,-10" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.5"/>
+        <line x1="0" y1="0" x2="-130" y2="-90" class="bond-path" stroke="#00f3ff"/>
+        <line x1="0" y1="0" x2="-130" y2="-90" class="bond-energy" stroke="#00f3ff" style="animation-delay: 0.3s"/>
+
+        <line x1="0" y1="0" x2="-160" y2="0" class="bond-path" stroke="#00f3ff"/>
+        <line x1="0" y1="0" x2="-160" y2="0" class="bond-energy" stroke="#00f3ff" style="animation-delay: 0.6s"/>
+
+        <line x1="0" y1="0" x2="130" y2="90" class="bond-path" stroke="#ff0055"/>
+        <line x1="0" y1="0" x2="130" y2="90" class="bond-energy" stroke="#ff0055" style="animation-duration: 1.5s"/>
+
+        <line x1="0" y1="0" x2="-130" y2="90" class="bond-path" stroke="#ff0055"/>
+        <line x1="0" y1="0" x2="-130" y2="90" class="bond-energy" stroke="#ff0055" style="animation-duration: 1.5s; animation-delay: 0.5s"/>
+
+        <g transform="translate(0, 15)">
+            <path d="M-40,0 L0,20 L40,0 L0,-20 Z" class="core-plate" />
+            <path d="M-40,-15 L0,5 L40,-15 L0,-35 Z" class="core-plate" style="fill: rgba(255,255,255,0.1)"/>
+            <path d="M-40,-30 L0,-10 L40,-30 L0,-50 Z" class="core-plate" style="fill: rgba(255,255,255,0.2)"/>
+            <path d="M0,-50 L0,-80" stroke="#fff" stroke-width="1" stroke-dasharray="2 2" opacity="0.5"/>
+            <circle cx="0" cy="-80" r="2" fill="#fff" filter="url(#bloom)"/>
         </g>
 
-        <g transform="translate(120, -80)">
-            <circle r="32" class="atom-fe" />
-            <text class="txt">REACT</text>
+        <g transform="translate(130, -90)">
+            <circle r="40" fill="url(#grad-glow-fe)" />
+            <circle r="36" class="atom-glass atom-fe" />
+            <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
+            <text class="txt-label">REACT</text>
         </g>
 
-        <g transform="translate(-120, -80)">
-            <circle r="32" class="atom-fe" />
-            <text class="txt">JS/TS</text>
-        </g>
-        
-        <g transform="translate(-140, 0)">
-            <circle r="32" class="atom-fe" />
-            <text class="txt">GLSL</text>
+        <g transform="translate(-130, -90)">
+            <circle r="40" fill="url(#grad-glow-fe)" />
+            <circle r="36" class="atom-glass atom-fe" />
+            <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
+            <text class="txt-label">JS/TS</text>
         </g>
 
-        <g transform="translate(120, 80)">
-            <circle r="32" class="atom-be" />
-            <text class="txt">NODE</text>
+        <g transform="translate(-160, 0)">
+            <circle r="40" fill="url(#grad-glow-fe)" />
+            <circle r="36" class="atom-glass atom-fe" />
+            <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
+            <text class="txt-label">GLSL</text>
         </g>
 
-        <g transform="translate(-120, 80)">
-            <circle r="32" class="atom-be" />
-            <text class="txt">PY</text>
+        <g transform="translate(130, 90)">
+            <circle r="40" fill="url(#grad-glow-be)" />
+            <circle r="36" class="atom-glass atom-be" />
+            <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
+            <text class="txt-label">NODE</text>
         </g>
+
+        <g transform="translate(-130, 90)">
+            <circle r="40" fill="url(#grad-glow-be)" />
+            <circle r="36" class="atom-glass atom-be" />
+            <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
+            <text class="txt-label">PY</text>
+        </g>
+
     </g>
 </svg>
