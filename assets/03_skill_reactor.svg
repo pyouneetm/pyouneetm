@@ -1,0 +1,196 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+
+            /* KEYFRAMES */
+            @keyframes float-molecule {
+                0%, 100% { transform: translate(400px, 300px) rotate(0deg); }
+                50% { transform: translate(400px, 290px) rotate(1deg); }
+            }
+
+            @keyframes pulse-nucleus {
+                0%, 100% { r: 25; opacity: 1; stroke-width: 2; filter: drop-shadow(0 0 10px #00f3ff); }
+                50% { r: 27; opacity: 0.9; stroke-width: 4; filter: drop-shadow(0 0 20px #00f3ff); }
+            }
+
+            @keyframes orbit-ring {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            @keyframes dash-flow {
+                to { stroke-dashoffset: -20; }
+            }
+
+            @keyframes atom-hover {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+
+            /* CLASSES */
+            .molecule-group {
+                animation: float-molecule 6s ease-in-out infinite;
+                transform-origin: center;
+            }
+
+            .bond-line {
+                stroke: #00f3ff;
+                stroke-width: 2;
+                stroke-opacity: 0.2;
+            }
+
+            .bond-active {
+                stroke: #00f3ff;
+                stroke-width: 2;
+                stroke-dasharray: 5 5;
+                animation: dash-flow 1s linear infinite;
+                filter: drop-shadow(0 0 2px #00f3ff);
+                opacity: 0.8;
+            }
+
+            .nucleus {
+                fill: url(#grad-blue);
+                stroke: #fff;
+                stroke-width: 2;
+                animation: pulse-nucleus 3s infinite;
+                cursor: pointer;
+            }
+
+            .atom-active {
+                fill: url(#grad-atom);
+                stroke: #00f3ff;
+                stroke-width: 1.5;
+                transition: transform 0.3s ease;
+                animation: atom-hover 4s ease-in-out infinite;
+                animation-delay: var(--delay, 0s);
+            }
+            .atom-active:hover { transform: scale(1.2); stroke: #fff; }
+
+            .atom-py {
+                fill: url(#grad-py);
+                stroke: #ff0055;
+                stroke-width: 1.5;
+                transition: transform 0.3s ease;
+                animation: atom-hover 4s ease-in-out infinite;
+                animation-delay: -2s;
+            }
+            .atom-py:hover { transform: scale(1.2); stroke: #fff; }
+
+            .label {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 12px;
+                font-weight: bold;
+                fill: #fff;
+                text-anchor: middle;
+                dominant-baseline: middle;
+                filter: drop-shadow(0 2px 3px rgba(0,0,0,1));
+                pointer-events: none;
+            }
+
+            .orbital-ring {
+                fill: none;
+                stroke: #00f3ff;
+                stroke-width: 1;
+                stroke-dasharray: 10 20;
+                opacity: 0.15;
+                transform-origin: center;
+                animation: orbit-ring 20s linear infinite;
+            }
+
+            .bg-grid {
+                stroke: #222;
+                stroke-width: 0.5;
+            }
+        </style>
+
+        <!-- GRADIENTS & FILTERS -->
+        <radialGradient id="grad-blue" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ccffff"/>
+            <stop offset="100%" stop-color="#00f3ff"/>
+        </radialGradient>
+
+        <radialGradient id="grad-atom" cx="30%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#2a2a2a"/>
+            <stop offset="100%" stop-color="#050505"/>
+        </radialGradient>
+
+        <radialGradient id="grad-py" cx="30%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#4a1a2a"/>
+            <stop offset="100%" stop-color="#1a050a"/>
+        </radialGradient>
+
+        <radialGradient id="vignette" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#050505" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
+        </radialGradient>
+        
+        <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" class="bg-grid"/>
+        </pattern>
+    </defs>
+
+    <!-- BACKGROUND: Ensures visibility on all surfaces -->
+    <rect width="100%" height="100%" fill="#050505"/>
+    <rect width="100%" height="100%" fill="url(#grid-pattern)" opacity="0.3"/>
+    <rect width="100%" height="100%" fill="url(#vignette)"/>
+
+    <!-- TITLE HUD -->
+    <text x="30" y="40" font-family="'JetBrains Mono', monospace" fill="#00f3ff" font-size="14" opacity="0.8" letter-spacing="1">MOLECULAR.SKILLS_V2</text>
+    <rect x="30" y="50" width="160" height="1" fill="#00f3ff" opacity="0.3"/>
+
+    <!-- MOLECULE CONTAINER -->
+    <g class="molecule-group">
+        
+        <!-- Background Orbital Rings -->
+        <circle r="160" class="orbital-ring" />
+        <circle r="220" class="orbital-ring" style="animation-direction: reverse; animation-duration: 30s; opacity: 0.1;" />
+
+        <!-- BONDS -->
+        <!-- Center to REACT (Top Right) -->
+        <line x1="0" y1="0" x2="110" y2="-110" class="bond-active" />
+        <!-- Center to JS/TS (Top Left) -->
+        <line x1="0" y1="0" x2="-110" y2="-110" class="bond-active" />
+        <!-- Center to NODE (Bottom Right) -->
+        <line x1="0" y1="0" x2="110" y2="110" class="bond-active" />
+        <!-- Center to GLSL (Bottom Left) -->
+        <line x1="0" y1="0" x2="-110" y2="110" class="bond-active" />
+        <!-- Center to PY (Top Center) -->
+        <line x1="0" y1="0" x2="0" y2="-170" class="bond-active" style="stroke: #ff0055;" />
+
+        <!-- CENTER NUCLEUS -->
+        <circle r="25" class="nucleus" />
+
+        <!-- ATOMS -->
+        
+        <!-- REACT -->
+        <g transform="translate(110, -110)">
+            <circle r="34" class="atom-active" style="--delay: 0s" />
+            <text class="label">REACT</text>
+        </g>
+
+        <!-- JS/TS -->
+        <g transform="translate(-110, -110)">
+            <circle r="34" class="atom-active" style="--delay: 1s" />
+            <text class="label">JS/TS</text>
+        </g>
+
+        <!-- NODE -->
+        <g transform="translate(110, 110)">
+            <circle r="34" class="atom-active" style="--delay: 2s" />
+            <text class="label">NODE</text>
+        </g>
+
+        <!-- GLSL -->
+        <g transform="translate(-110, 110)">
+            <circle r="34" class="atom-active" style="--delay: 3s" />
+            <text class="label">GLSL</text>
+        </g>
+
+        <!-- PY (Special Color) -->
+        <g transform="translate(0, -170)">
+            <circle r="34" class="atom-py" />
+            <text class="label">PY</text>
+        </g>
+    </g>
+</svg>

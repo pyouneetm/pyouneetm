@@ -1,0 +1,51 @@
+
+            <svg width="900" height="250" viewBox="0 0 900 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    .bg-term { fill: #050505; stroke: #222; }
+                    .font-code { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #666; }
+                    .highlight { fill: #00f3ff; text-shadow: 0 0 5px #00f3ff; }
+                    .bio-warn { fill: #ff0055; }
+                    .success { fill: #00ff9d; }
+                    
+                    @keyframes scroll-up {
+                        0% { transform: translateY(0); }
+                        100% { transform: translateY(-140px); }
+                    }
+                    .feed { animation: scroll-up 12s linear infinite; }
+                    
+                    @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+                    .cursor { animation: cursor-blink 1s step-end infinite; fill: #00f3ff; }
+                </style>
+                <rect x="2" y="2" width="896" height="246" rx="4" class="bg-term" />
+                
+                <!-- Header Bar -->
+                <rect x="2" y="2" width="896" height="24" rx="4" fill="#111" />
+                <circle cx="20" cy="14" r="4" fill="#ff5f56" />
+                <circle cx="35" cy="14" r="4" fill="#ffbd2e" />
+                <circle cx="50" cy="14" r="4" fill="#27c93f" />
+                <text x="70" y="18" font-family="monospace" font-size="10" fill="#555">root@pyouneetm-lab:~/research</text>
+
+                <g clip-path="url(#term-clip)">
+                    <g transform="translate(20, 50)" class="feed font-code">
+                        <text y="0">> initializing cognitive architecture...</text>
+                        <text y="20">> loading neural modules: <tspan class="highlight">REACT.js</tspan>, <tspan class="highlight">THREE.js</tspan></text>
+                        <text y="40">> compiling GLSL shaders... <tspan class="success">[COMPILED]</tspan></text>
+                        <text y="60">> connecting to Discord API via Lanyard... <tspan class="highlight">CONNECTED</tspan></text>
+                        <text y="80">> analyzing 'CosmicDodge' physics engine...</text>
+                        <text y="100">> <tspan class="bio-warn">ALERT: DOPAMINE LEVELS INCREASING</tspan></text>
+                        <text y="120">> synthesizing audio waves (Tone.js)...</text>
+                        <text y="140">> calculating orbital trajectories...</text>
+                        <text y="160">> fetching research papers...</text>
+                        <text y="180">> git commit -m "optimize entropy"</text>
+                        <text y="200">> system status: <tspan class="highlight">FLOW_STATE</tspan></text>
+                        <text y="220">> waiting for neural input...</text>
+                         <text y="240">> _</text>
+                    </g>
+                </g>
+                <defs>
+                    <clipPath id="term-clip"><rect x="0" y="30" width="900" height="200" /></clipPath>
+                </defs>
+                
+                <!-- Overlay static text -->
+                <text x="20" y="230" class="font-code" fill="#fff">> _ <tspan class="cursor">█</tspan></text>
+            </svg>

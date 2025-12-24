@@ -1,0 +1,226 @@
+<svg width="800" height="300" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+
+            /* --- ANIMATIONS --- */
+            
+            @keyframes hover-main {
+                0%, 100% { transform: translate(400px, 140px); }
+                50% { transform: translate(400px, 130px); }
+            }
+
+            @keyframes hover-left {
+                0%, 100% { transform: translate(200px, 160px); }
+                50% { transform: translate(200px, 170px); }
+            }
+
+            @keyframes hover-right {
+                0%, 100% { transform: translate(600px, 160px); }
+                50% { transform: translate(600px, 170px); }
+            }
+
+            @keyframes pulse-core {
+                0%, 100% { opacity: 0.5; filter: drop-shadow(0 0 5px #00f3ff); }
+                50% { opacity: 1; filter: drop-shadow(0 0 15px #00f3ff); }
+            }
+
+            @keyframes scan-grid {
+                0% { stroke-dashoffset: 100; opacity: 0.1; }
+                50% { opacity: 0.4; }
+                100% { stroke-dashoffset: 0; opacity: 0.1; }
+            }
+
+            @keyframes blink-text {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+
+            @keyframes float-particle {
+                0% { transform: translateY(0) scale(1); opacity: 0; }
+                50% { opacity: 0.8; }
+                100% { transform: translateY(-50px) scale(0); opacity: 0; }
+            }
+
+            /* --- STYLES --- */
+            
+            .bg { fill: #050505; }
+            
+            /* Grid */
+            .grid-floor {
+                stroke: url(#grid-grad);
+                stroke-width: 1;
+                vector-effect: non-scaling-stroke;
+            }
+            
+            /* Cubes */
+            .cube-group { cursor: crosshair; }
+            .cube-group:hover .cube-core { fill: #fff; }
+
+            .cube-top { fill: url(#grad-top); stroke: #00f3ff; stroke-width: 0.5; stroke-opacity: 0.5; }
+            .cube-side-l { fill: url(#grad-side-l); stroke: #00f3ff; stroke-width: 0.5; stroke-opacity: 0.3; }
+            .cube-side-r { fill: url(#grad-side-r); stroke: #00f3ff; stroke-width: 0.5; stroke-opacity: 0.3; }
+            
+            .cube-core {
+                fill: #00f3ff;
+                opacity: 0.8;
+                animation: pulse-core 3s infinite ease-in-out;
+            }
+
+            .cube-shadow {
+                fill: #000;
+                filter: blur(8px);
+                opacity: 0.6;
+                transform: scale(1, 0.5) translateY(60px);
+            }
+
+            /* HUD */
+            .text-label {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 10px;
+                fill: #00f3ff;
+                opacity: 0.7;
+                letter-spacing: 2px;
+            }
+
+            .text-header {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 14px;
+                font-weight: 700;
+                fill: #fff;
+                letter-spacing: 4px;
+                text-anchor: middle;
+            }
+            
+            .particle {
+                fill: #00f3ff;
+                animation: float-particle 4s infinite linear;
+            }
+
+        </style>
+
+        <!-- GRADIENTS & FILTERS -->
+        <linearGradient id="grid-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+        </linearGradient>
+
+        <linearGradient id="grad-top" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#aaffff" stop-opacity="0.2"/>
+            <stop offset="100%" stop-color="#00f3ff" stop-opacity="0.1"/>
+        </linearGradient>
+
+        <linearGradient id="grad-side-l" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#005566" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#001111" stop-opacity="0.6"/>
+        </linearGradient>
+
+        <linearGradient id="grad-side-r" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#003344" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
+        </linearGradient>
+
+        <filter id="glow-soft">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        
+        <pattern id="small-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#111" stroke-width="1"/>
+        </pattern>
+    </defs>
+
+    <!-- BACKGROUND -->
+    <rect width="100%" height="100%" class="bg"/>
+    <rect width="100%" height="100%" fill="url(#small-grid)" />
+
+    <!-- PERSPECTIVE FLOOR -->
+    <g transform="translate(400, 100)">
+        <!-- Vertical Perspective Lines -->
+        <line x1="0" y1="0" x2="-600" y2="300" class="grid-floor" />
+        <line x1="0" y1="0" x2="-300" y2="300" class="grid-floor" />
+        <line x1="0" y1="0" x2="0" y2="300" class="grid-floor" />
+        <line x1="0" y1="0" x2="300" y2="300" class="grid-floor" />
+        <line x1="0" y1="0" x2="600" y2="300" class="grid-floor" />
+        
+        <!-- Horizontal Depth Lines -->
+        <line x1="-400" y1="200" x2="400" y2="200" class="grid-floor" opacity="0.5"/>
+        <line x1="-300" y1="150" x2="300" y2="150" class="grid-floor" opacity="0.3"/>
+        <line x1="-200" y1="110" x2="200" y2="110" class="grid-floor" opacity="0.2"/>
+    </g>
+
+    <!-- PARTICLES -->
+    <circle cx="100" cy="200" r="1" class="particle" style="animation-delay: 0s" />
+    <circle cx="700" cy="250" r="1" class="particle" style="animation-delay: 1s" />
+    <circle cx="300" cy="150" r="1.5" class="particle" style="animation-delay: 2.5s" />
+    <circle cx="500" cy="180" r="1" class="particle" style="animation-delay: 1.5s" />
+
+    <!-- OBJECTS -->
+    
+    <!-- LEFT CUBE (Small) -->
+    <g class="cube-group" style="animation: hover-left 5s ease-in-out infinite;">
+        <!-- Shadow -->
+        <ellipse cx="0" cy="40" rx="20" ry="5" class="cube-shadow" />
+        <!-- Cube Geometry -->
+        <path d="M0,-20 L20,-10 L0,0 L-20,-10 Z" class="cube-top" />
+        <path d="M-20,-10 L0,0 L0,20 L-20,10 Z" class="cube-side-l" />
+        <path d="M20,-10 L0,0 L0,20 L20,10 Z" class="cube-side-r" />
+        <!-- Internal Core -->
+        <rect x="-5" y="-5" width="10" height="10" transform="rotate(45)" class="cube-core" />
+    </g>
+
+    <!-- RIGHT CUBE (Small) -->
+    <g class="cube-group" style="animation: hover-right 6s ease-in-out infinite;">
+        <!-- Shadow -->
+        <ellipse cx="0" cy="40" rx="20" ry="5" class="cube-shadow" />
+        <!-- Cube Geometry -->
+        <path d="M0,-20 L20,-10 L0,0 L-20,-10 Z" class="cube-top" />
+        <path d="M-20,-10 L0,0 L0,20 L-20,10 Z" class="cube-side-l" />
+        <path d="M20,-10 L0,0 L0,20 L20,10 Z" class="cube-side-r" />
+        <!-- Internal Core -->
+        <rect x="-5" y="-5" width="10" height="10" transform="rotate(45)" class="cube-core" />
+    </g>
+
+    <!-- CENTER CUBE (Large) -->
+    <g class="cube-group" style="animation: hover-main 8s ease-in-out infinite;">
+        <!-- Shadow -->
+        <ellipse cx="0" cy="60" rx="30" ry="8" class="cube-shadow" />
+        <!-- Cube Geometry -->
+        <path d="M0,-35 L35,-17 L0,0 L-35,-17 Z" class="cube-top" />
+        <path d="M-35,-17 L0,0 L0,35 L-35,18 Z" class="cube-side-l" />
+        <path d="M35,-17 L0,0 L0,35 L35,18 Z" class="cube-side-r" />
+        <!-- Decoration Lines -->
+        <path d="M-35,-17 L-15,-27 M35,-17 L15,-27 M0,35 L0,15" stroke="#00f3ff" stroke-width="1" opacity="0.3" />
+        <!-- Internal Core (Big) -->
+        <path d="M0,-15 L15,-7 L0,0 L-15,-7 Z" class="cube-core" opacity="1" />
+        <path d="M-15,-7 L0,0 L0,15 L-15,7 Z" class="cube-core" opacity="0.6" />
+        <path d="M15,-7 L0,0 L0,15 L15,7 Z" class="cube-core" opacity="0.4" />
+    </g>
+
+
+    <!-- HUD UI LAYER -->
+    <!-- Center Label -->
+    <text x="400" y="270" class="text-header" filter="url(#glow-soft)">EXPERIMENTAL LAB ENV</text>
+    
+    <!-- Top Left Status -->
+    <g transform="translate(30, 40)">
+        <text class="text-label">STATUS: ONLINE</text>
+        <rect x="0" y="15" width="100" height="2" fill="#333" />
+        <rect x="0" y="15" width="60" height="2" fill="#00f3ff" style="animation: scan-grid 2s infinite linear" />
+    </g>
+
+    <!-- Top Right Coordinates -->
+    <g transform="translate(770, 40)" text-anchor="end">
+        <text class="text-label" text-anchor="end">X: 400 | Y: 150 | Z: 0</text>
+        <circle cx="0" cy="15" r="3" fill="#ff0055" style="animation: blink-text 1s infinite" />
+    </g>
+    
+    <!-- Crosshairs -->
+    <line x1="390" y1="140" x2="410" y2="140" stroke="#00f3ff" stroke-width="1" opacity="0.2" />
+    <line x1="400" y1="130" x2="400" y2="150" stroke="#00f3ff" stroke-width="1" opacity="0.2" />
+
+    <!-- Corner Brackets -->
+    <path d="M20,280 L20,260 M20,280 L40,280" stroke="#00f3ff" stroke-width="2" fill="none" opacity="0.5" />
+    <path d="M780,280 L780,260 M780,280 L760,280" stroke="#00f3ff" stroke-width="2" fill="none" opacity="0.5" />
+
+</svg>
