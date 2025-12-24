@@ -175,10 +175,10 @@
     <!-- 4. Main Text Group -->
     <g transform="translate(400, 110)">
         <!-- Glitch Layer 1 (Cyan Offset) -->
-        <text class="text-main glitch-layer-1">PUNEET MISHRA</text>
+        <text class="text-main glitch-layer-1">PYOUNEETM</text>
         
         <!-- Glitch Layer 2 (Magenta Offset) -->
-        <text class="text-main glitch-layer-2">PUNEET MISHRA</text>
+        <text class="text-main glitch-layer-2">PYOUNEETM</text>
         
         <!-- Main White Layer -->
         <text class="text-main glitch-layer-main">PUNEET MISHRA</text>
