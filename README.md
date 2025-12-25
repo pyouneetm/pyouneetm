@@ -12,7 +12,7 @@
             </td>
             <td width="33%" valign="top">
                 <a href="https://github.com/Pyouneetm">
-                    <img src="https://github-readme-stats.vercel.app/api?username=pyouneetm&show_icons=true&theme=tokyonight&bg_color=030303&title_color=00f3ff&text_color=ffffff&icon_color=ff0055&hide_border=true" width="100%" />
+                    <img src="https://github-readme-stats.vercel.app/api?username=pyouneetm&theme=tokyonight&bg_color=030303&title_color=00f3ff&text_color=ffffff&icon_color=ff0055&border_color=30363d&hide_border=true&show_icons=true" width="100%" />
                 </a>
             </td>
         </tr>
@@ -54,6 +54,42 @@ graph TD
             </td>
         </tr>
     </table>
+</div>
+
+## 🏆 ORBITAL ACHIEVEMENTS
+<div align="center">
+    <a href="https://github.com/ryo-ma/github-profile-trophy">
+        <img src="https://github-profile-trophy.vercel.app/?username=pyouneetm&theme=gitdimmed&no-frame=true&margin-w=4&row=1" width="100%" />
+    </a>
+</div>
+
+## 📊 QUANTUM METRICS & CHRONOMETRY
+<div align="center">
+    <table>
+        <tr>
+            <td width="50%">
+                <img src="https://github-readme-stats.vercel.app/api/wakatime?username=pyouneetm&theme=tokyonight&bg_color=030303&title_color=00f3ff&text_color=ffffff&icon_color=ff0055&border_color=30363d&hide_border=true&layout=compact&custom_title=WAKATIME_CHRONOS" width="100%" />
+            </td>
+            <td width="50%">
+                <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pyouneetm&theme=tokyonight&bg_color=030303&title_color=00f3ff&text_color=ffffff&icon_color=ff0055&border_color=30363d&hide_border=true&layout=compact&custom_title=CODE_FREQUENCY" width="100%" />
+            </td>
+        </tr>
+    </table>
+</div>
+
+## 🐍 CONTRIBUTION_WORMHOLE (SNAKE_ALGO)
+<div align="center">
+    <img src="https://raw.githubusercontent.com/pyouneetm/pyouneetm/output/github-contribution-grid-snake.svg" width="100%" alt="snake animation" />
+</div>
+
+## 🌟 STAR_GAZER_NEBULA
+<div align="center">
+    <img src="https://starchart.cc/pyouneetm.svg" alt="Stargazers" width="100%" />
+</div>
+
+## ⚡ RECENT_FLUX_CAPACITY
+<div align="center">
+    <img src="https://github-readme-activity-graph.vercel.app/graph?username=pyouneetm&bg_color=030303&color=00f3ff&line=ff0055&point=ffffff&area=true&hide_border=true" width="100%" />
 </div>
 
 ## 📡 COMMAND CENTER (SOCIAL UPLINKS)
