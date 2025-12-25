@@ -1,258 +1,115 @@
 <svg width="100%" height="300" viewBox="0 0 900 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
-            @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;display=swap');
-
-            @keyframes term-scroll {
-                0% { transform: translateY(0); opacity: 1; }
-                100% { transform: translateY(-240px); opacity: 1; }
-            }
-
-            @keyframes aurora-flow {
-                0% { transform: translate(0, 0) scale(1); filter: blur(50px); }
-                50% { transform: translate(-30px, -20px) scale(1.2); filter: blur(70px); }
-                100% { transform: translate(0, 0) scale(1); filter: blur(50px); }
-            }
-
-            @keyframes glow-pulse {
-                0%, 100% { filter: drop-shadow(0 0 2px currentColor); opacity: 0.8; }
-                50% { filter: drop-shadow(0 0 8px currentColor); opacity: 1; }
-            }
-
-            @keyframes cursor-blink {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0; }
-            }
-
-            @keyframes scanline-move {
-                0% { transform: translateY(-20px); opacity: 0; }
-                50% { opacity: 0.05; }
-                100% { transform: translateY(320px); opacity: 0; }
-            }
-            
-            @keyframes border-shimmer {
-                0% { stroke-dashoffset: 600; opacity: 0.3; }
-                50% { opacity: 0.8; }
-                100% { stroke-dashoffset: 0; opacity: 0.3; }
-            }
-            
-            @keyframes noise-grain {
-                0%, 100% { transform: translate(0, 0); }
-                10% { transform: translate(-1px, -1px); }
-                20% { transform: translate(1px, 1px); }
-                30% { transform: translate(-2px, 2px); }
-                40% { transform: translate(2px, -2px); }
-                50% { transform: translate(1px, -1px); }
-                60% { transform: translate(-1px, 1px); }
-                70% { transform: translate(2px, 1px); }
-                80% { transform: translate(-1px, -1px); }
-                90% { transform: translate(1px, 2px); }
-            }
-
-            .font-code { 
-                font-family: 'Fira Code', 'JetBrains Mono', monospace; 
-                font-size: 13px; 
-                font-weight: 500;
-                letter-spacing: 0.5px;
-            }
-
-            .c-comment { fill: #6c7986; font-style: italic; opacity: 0.8; }
-            .c-keyword { fill: #ff79c6; filter: url(#glow-pink); }
-            .c-func { fill: #8be9fd; filter: url(#glow-cyan); }
-            .c-string { fill: #f1fa8c; }
-            .c-var { fill: #f8f8f2; }
-            .c-operator { fill: #ffb86c; }
-            .c-success { fill: #50fa7b; font-weight: 700; filter: url(#glow-green); }
-            .c-class { fill: #bd93f9; }
-
-            .window-bg { 
-                fill: rgba(10, 10, 18, 0.92); 
-                stroke: rgba(255, 255, 255, 0.05); 
-                stroke-width: 1;
-                backdrop-filter: blur(10px); 
-            }
-
-            .glass-reflection {
-                fill: url(#grad-reflection);
-                opacity: 0.15;
-                pointer-events: none;
-                mix-blend-mode: overlay;
-            }
-
-            .border-anim {
-                fill: none;
-                stroke: url(#grad-border);
-                stroke-width: 1.5;
-                stroke-dasharray: 100 800;
-                stroke-linecap: round;
-                animation: border-shimmer 8s ease-in-out infinite;
-            }
-
-            .aurora-blob {
-                filter: blur(50px);
-                opacity: 0.5;
-                animation: aurora-flow 12s ease-in-out infinite;
-                mix-blend-mode: screen;
-            }
-
-            .feed-container {
-                animation: term-scroll 24s linear infinite;
-            }
-
-            .cursor-block {
-                fill: #bd93f9;
-                animation: cursor-blink 1s step-end infinite;
-                filter: drop-shadow(0 0 4px #bd93f9);
-            }
-
-            .status-bar {
-                fill: rgba(40, 42, 54, 0.9);
-            }
-            
-            .header-bar {
-                fill: rgba(25, 25, 35, 0.95);
-                stroke-bottom: 1px solid rgba(255,255,255,0.05);
-            }
-
-            .scanline {
-                fill: url(#grad-scan);
-                opacity: 0.08;
-                animation: scanline-move 6s linear infinite;
-                pointer-events: none;
-                mix-blend-mode: overlay;
-            }
-            
-            .noise-overlay {
-                opacity: 0.03;
-                animation: noise-grain 0.5s steps(5) infinite;
-                pointer-events: none;
-                filter: contrast(150%);
-            }
-
-        </style>
-
-        <filter id="glow-pink"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id="glow-cyan"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id="glow-green"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        
-        <linearGradient id="grad-reflection" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
-            <stop offset="40%" stop-color="#fff" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#fff" stop-opacity="0.05"/>
-        </linearGradient>
-
-        <linearGradient id="grad-border" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ff79c6"/>
-            <stop offset="50%" stop-color="#8be9fd"/>
-            <stop offset="100%" stop-color="#50fa7b"/>
-        </linearGradient>
-
-        <linearGradient id="grad-scan" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#000" stop-opacity="0"/>
-            <stop offset="50%" stop-color="#fff" stop-opacity="1"/>
-            <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-        </linearGradient>
-
-        <pattern id="noise-pat" width="100" height="100" patternUnits="userSpaceOnUse">
-             <image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnPjxmaWx0ZXIgaWQ9J24nPjxmZVR1cmJ1bGVuY2UgdHlwZT0nZnJhY3RhbE5vaXNlJyBiYXNlRnJlcXVlbmN5PScwLjgnIG51bU9jdGF2ZXM9JzEnIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCgjbiknIG9wYWNpdHk9JzAuNScvPjwvc3ZnPg==" width="100" height="100" />
-        </pattern>
-
-        <clipPath id="screen-clip">
-            <rect x="2" y="32" width="896" height="236" rx="0" />
-        </clipPath>
-    </defs>
-
-    <rect width="100%" height="100%" fill="#020205" rx="8" />
-    
-    <circle cx="200" cy="100" r="120" fill="#bd93f9" class="aurora-blob" />
-    <circle cx="700" cy="200" r="140" fill="#ff79c6" class="aurora-blob" style="animation-delay: -5s" />
-    <circle cx="450" cy="150" r="100" fill="#8be9fd" class="aurora-blob" style="animation-delay: -2s" />
-    <rect width="100%" height="100%" fill="url(#noise-pat)" class="noise-overlay" />
-
-    <rect x="2" y="2" width="896" height="296" rx="8" class="window-bg" />
-    
-    <path d="M2,2 L900,2 L900,120 L2,250 Z" class="glass-reflection" />
-    
-    <rect x="2" y="2" width="896" height="296" rx="8" class="border-anim" />
-
-    <path d="M2,10 Q2,2 10,2 L890,2 Q898,2 898,10 L898,32 L2,32 Z" class="header-bar" />
-    <circle cx="22" cy="17" r="5.5" fill="#ff5f56" stroke="#e0443e" stroke-width="0.5"/>
-    <circle cx="42" cy="17" r="5.5" fill="#ffbd2e" stroke="#dea123" stroke-width="0.5"/>
-    <circle cx="62" cy="17" r="5.5" fill="#27c93f" stroke="#1aab29" stroke-width="0.5"/>
-    
-    <text x="450" y="21" font-family="monospace" font-size="12" fill="#8892b0" text-anchor="middle" font-weight="bold" letter-spacing="1">~/art/canvas.tsx — pyouneetm-lab</text>
-
-    <g clip-path="url(#screen-clip)">
-        <g transform="translate(30, 60)" class="feed-container">
-            
-            <text x="0" y="0" class="font-code">
-                <tspan class="c-comment">// Initializing creative runtime environment...</tspan>
-            </text>
-
-            <text x="0" y="25" class="font-code">
-                <tspan class="c-keyword">import</tspan> { <tspan class="c-class">Imagination</tspan>, <tspan class="c-class">Logic</tspan> } <tspan class="c-keyword">from</tspan> <tspan class="c-string">'@brain/cortex'</tspan>;
-            </text>
-
-            <text x="0" y="50" class="font-code">
-                <tspan class="c-keyword">const</tspan> <tspan class="c-func">createMasterpiece</tspan> <tspan class="c-operator">=</tspan> <tspan class="c-keyword">async</tspan> () <tspan class="c-operator">=></tspan> {
-            </text>
-
-            <text x="0" y="75" class="font-code">
-                <tspan x="20">await</tspan> <tspan class="c-func">loadModules</tspan>([<tspan class="c-string">'React'</tspan>, <tspan class="c-string">'WebGL'</tspan>, <tspan class="c-string">'Tone.js'</tspan>]);
-            </text>
-
-            <text x="0" y="100" class="font-code">
-                <tspan x="20" class="c-comment">/* Compiling shaders into visual poetry... */</tspan>
-            </text>
-
-            <text x="0" y="125" class="font-code">
-                <tspan x="20" class="c-keyword">if</tspan> (<tspan class="c-var">inspiration</tspan> <tspan class="c-operator">></tspan> 9000) {
-            </text>
-
-            <text x="0" y="150" class="font-code">
-                <tspan x="40" class="c-func">enterFlowState</tspan>();
-            </text>
-
-            <text x="0" y="175" class="font-code">
-                <tspan x="40" class="c-class">System</tspan>.<tspan class="c-func">log</tspan>(<tspan class="c-string">"Art Synthesized Successfully"</tspan>);
-            </text>
-
-            <text x="0" y="200" class="font-code">
-                <tspan x="40" class="c-keyword">return</tspan> <tspan class="c-success">new Reality()</tspan>;
-            </text>
-
-            <text x="0" y="225" class="font-code">
-                <tspan x="20">}</tspan>
-            </text>
-
-            <text x="0" y="250" class="font-code">
-                <tspan x="0">};</tspan>
-            </text>
-
-            <text x="0" y="275" class="font-code">
-                <tspan x="0" class="c-func">createMasterpiece</tspan>();
-            </text>
-             
-            <text x="0" y="300" class="font-code">
-                <tspan x="0" class="c-comment">/* Rendering output to viewport... */</tspan>
-            </text>
-
-            <text x="0" y="325" class="font-code">
-                <tspan x="0" class="c-success">>> BUILD SUCCESSFUL [42ms]</tspan>
-            </text>
-
-        </g>
-    </g>
-
-    <rect x="2" y="260" width="896" height="38" fill="rgba(15,15,25,0.95)" />
-    <path d="M2,260 L898,260" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-    
-    <text x="30" y="285" class="font-code">
-        <tspan class="c-keyword">➜</tspan> <tspan class="c-var">~/pyouneetm-lab</tspan> <tspan class="c-operator">git</tspan> commit -m <tspan class="c-string">"refactor: reality"</tspan>
-    </text>
-    <rect x="420" y="272" width="10" height="18" class="cursor-block" />
-
-    <rect width="100%" height="15%" class="scanline" />
-
+<defs>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;display=swap');
+@keyframes term-scroll {
+0% { transform: translateY(0); opacity: 1; }
+100% { transform: translateY(-240px); opacity: 1; }
+}
+@keyframes aurora-flow {
+0% { transform: translate(0, 0) scale(1); filter: blur(50px); }
+50% { transform: translate(-30px, -20px) scale(1.2); filter: blur(70px); }
+100% { transform: translate(0, 0) scale(1); filter: blur(50px); }
+}
+@keyframes cursor-blink {
+0%, 100% { opacity: 1; }
+50% { opacity: 0; }
+}
+@keyframes scanline-move {
+0% { transform: translateY(-20px); opacity: 0; }
+50% { opacity: 0.05; }
+100% { transform: translateY(320px); opacity: 0; }
+}
+@keyframes border-shimmer {
+0% { stroke-dashoffset: 600; opacity: 0.3; }
+50% { opacity: 0.8; }
+100% { stroke-dashoffset: 0; opacity: 0.3; }
+}
+@keyframes noise-grain {
+0%, 100% { transform: translate(0, 0); }
+10% { transform: translate(-1px, -1px); }
+20% { transform: translate(1px, 1px); }
+30% { transform: translate(-2px, 2px); }
+40% { transform: translate(2px, -2px); }
+50% { transform: translate(1px, -1px); }
+60% { transform: translate(-1px, 1px); }
+70% { transform: translate(2px, 1px); }
+80% { transform: translate(-1px, -1px); }
+90% { transform: translate(1px, 2px); }
+}
+.font-code { font-family: 'Fira Code', 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+.c-keyword { fill: #ff79c6; filter: url(#glow-pink); }
+.c-func { fill: #8be9fd; filter: url(#glow-cyan); }
+.c-string { fill: #f1fa8c; }
+.c-var { fill: #f8f8f2; }
+.c-operator { fill: #ffb86c; }
+.c-success { fill: #50fa7b; font-weight: 700; filter: url(#glow-green); }
+.c-class { fill: #bd93f9; }
+.window-bg { fill: rgba(10, 10, 18, 0.92); stroke: rgba(255, 255, 255, 0.05); stroke-width: 1; backdrop-filter: blur(10px); }
+.glass-reflection { fill: url(#grad-reflection); opacity: 0.15; pointer-events: none; mix-blend-mode: overlay; }
+.border-anim { fill: none; stroke: url(#grad-border); stroke-width: 1.5; stroke-dasharray: 100 800; stroke-linecap: round; animation: border-shimmer 8s ease-in-out infinite; }
+.aurora-blob { filter: blur(50px); opacity: 0.5; animation: aurora-flow 12s ease-in-out infinite; mix-blend-mode: screen; }
+.feed-container { animation: term-scroll 24s linear infinite; }
+.cursor-block { fill: #bd93f9; animation: cursor-blink 1s step-end infinite; filter: drop-shadow(0 0 4px #bd93f9); }
+.header-bar { fill: rgba(25, 25, 35, 0.95); stroke-bottom: 1px solid rgba(255,255,255,0.05); }
+.scanline { fill: url(#grad-scan); opacity: 0.08; animation: scanline-move 6s linear infinite; pointer-events: none; mix-blend-mode: overlay; }
+.noise-overlay { opacity: 0.03; animation: noise-grain 0.5s steps(5) infinite; pointer-events: none; filter: contrast(150%); }
+</style>
+<filter id="glow-pink"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="glow-cyan"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="glow-green"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<linearGradient id="grad-reflection" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+<stop offset="40%" stop-color="#fff" stop-opacity="0"/>
+<stop offset="100%" stop-color="#fff" stop-opacity="0.05"/>
+</linearGradient>
+<linearGradient id="grad-border" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#ff79c6"/>
+<stop offset="50%" stop-color="#8be9fd"/>
+<stop offset="100%" stop-color="#50fa7b"/>
+</linearGradient>
+<linearGradient id="grad-scan" x1="0%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" stop-color="#000" stop-opacity="0"/>
+<stop offset="50%" stop-color="#fff" stop-opacity="1"/>
+<stop offset="100%" stop-color="#000" stop-opacity="0"/>
+</linearGradient>
+<pattern id="noise-pat" width="100" height="100" patternUnits="userSpaceOnUse">
+<image href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnPjxmaWx0ZXIgaWQ9J24nPjxmZVR1cmJ1bGVuY2UgdHlwZT0nZnJhY3RhbE5vaXNlJyBiYXNlRnJlcXVlbmN5PScwLjgnIG51bU9jdGF2ZXM9JzEnIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCgjbiknIG9wYWNpdHk9JzAuNScvPjwvc3ZnPg==" width="100" height="100" />
+</pattern>
+<clipPath id="screen-clip"><rect x="2" y="32" width="896" height="236" rx="0" /></clipPath>
+</defs>
+<rect width="100%" height="100%" fill="#020205" rx="8" />
+<circle cx="200" cy="100" r="120" fill="#bd93f9" class="aurora-blob" />
+<circle cx="700" cy="200" r="140" fill="#ff79c6" class="aurora-blob" style="animation-delay: -5s" />
+<circle cx="450" cy="150" r="100" fill="#8be9fd" class="aurora-blob" style="animation-delay: -2s" />
+<rect width="100%" height="100%" fill="url(#noise-pat)" class="noise-overlay" />
+<rect x="2" y="2" width="896" height="296" rx="8" class="window-bg" />
+<path d="M2,2 L900,2 L900,120 L2,250 Z" class="glass-reflection" />
+<rect x="2" y="2" width="896" height="296" rx="8" class="border-anim" />
+<path d="M2,10 Q2,2 10,2 L890,2 Q898,2 898,10 L898,32 L2,32 Z" class="header-bar" />
+<circle cx="22" cy="17" r="5.5" fill="#ff5f56" stroke="#e0443e" stroke-width="0.5"/>
+<circle cx="42" cy="17" r="5.5" fill="#ffbd2e" stroke="#dea123" stroke-width="0.5"/>
+<circle cx="62" cy="17" r="5.5" fill="#27c93f" stroke="#1aab29" stroke-width="0.5"/>
+<text x="450" y="21" font-family="monospace" font-size="12" fill="#8892b0" text-anchor="middle" font-weight="bold" letter-spacing="1">~/art/canvas.tsx — pyouneetm-lab</text>
+<g clip-path="url(#screen-clip)">
+<g transform="translate(30, 60)" class="feed-container">
+<text x="0" y="0" class="font-code"><tspan class="c-keyword">import</tspan> { <tspan class="c-class">Imagination</tspan>, <tspan class="c-class">Logic</tspan> } <tspan class="c-keyword">from</tspan> <tspan class="c-string">'@brain/cortex'</tspan>;</text>
+<text x="0" y="25" class="font-code"><tspan class="c-keyword">const</tspan> <tspan class="c-func">createMasterpiece</tspan> <tspan class="c-operator">=</tspan> <tspan class="c-keyword">async</tspan> () <tspan class="c-operator">=></tspan> {</text>
+<text x="0" y="50" class="font-code"><tspan x="20">await</tspan> <tspan class="c-func">loadModules</tspan>([<tspan class="c-string">'React'</tspan>, <tspan class="c-string">'WebGL'</tspan>, <tspan class="c-string">'Tone.js'</tspan>]);</text>
+<text x="0" y="75" class="font-code"><tspan x="20" class="c-keyword">if</tspan> (<tspan class="c-var">inspiration</tspan> <tspan class="c-operator">></tspan> 9000) {</text>
+<text x="0" y="100" class="font-code"><tspan x="40" class="c-func">enterFlowState</tspan>();</text>
+<text x="0" y="125" class="font-code"><tspan x="40" class="c-class">System</tspan>.<tspan class="c-func">log</tspan>(<tspan class="c-string">"Art Synthesized Successfully"</tspan>);</text>
+<text x="0" y="150" class="font-code"><tspan x="40" class="c-keyword">return</tspan> <tspan class="c-success">new Reality()</tspan>;</text>
+<text x="0" y="175" class="font-code"><tspan x="20">}</tspan></text>
+<text x="0" y="200" class="font-code"><tspan x="0">};</tspan></text>
+<text x="0" y="225" class="font-code"><tspan x="0" class="c-func">createMasterpiece</tspan>();</text>
+<text x="0" y="250" class="font-code"><tspan x="0" class="c-success">>> BUILD SUCCESSFUL [42ms]</tspan></text>
+</g>
+</g>
+<rect x="2" y="260" width="896" height="38" fill="rgba(15,15,25,0.95)" />
+<path d="M2,260 L898,260" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+<text x="30" y="285" class="font-code"><tspan class="c-keyword">➜</tspan> <tspan class="c-var">~/pyouneetm-lab</tspan> <tspan class="c-operator">git</tspan> commit -m <tspan class="c-string">"refactor: reality"</tspan></text>
+<rect x="420" y="272" width="10" height="18" class="cursor-block" />
+<rect width="100%" height="15%" class="scanline" />
 </svg>
