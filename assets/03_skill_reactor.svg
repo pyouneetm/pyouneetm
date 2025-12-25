@@ -1,50 +1,41 @@
-<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
-
             @keyframes sys-float {
                 0%, 100% { transform: translate(400px, 300px) rotate(0deg); }
                 50% { transform: translate(400px, 290px) rotate(1deg); }
             }
-
             @keyframes sys-pulse {
                 0%, 100% { opacity: 0.5; stroke-width: 1; }
                 50% { opacity: 1; stroke-width: 2; }
             }
-
             @keyframes sys-spin {
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
             }
-
             @keyframes bond-flow {
                 to { stroke-dashoffset: -20; }
             }
-
             @keyframes atom-breathe {
                 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,243,255,0.5)); }
                 50% { transform: scale(1.05); filter: drop-shadow(0 0 15px rgba(0,243,255,0.8)); }
             }
-
             @keyframes particle-drift {
                 0% { transform: translateY(0) scale(1); opacity: 0; }
                 50% { opacity: 0.5; }
                 100% { transform: translateY(-100px) scale(0); opacity: 0; }
             }
-
             .scene {
                 animation: sys-float 8s ease-in-out infinite;
                 transform-origin: center;
                 transform-box: fill-box;
             }
-
             .bond-path {
                 stroke-width: 1;
                 stroke-opacity: 0.3;
                 fill: none;
             }
-
             .bond-energy {
                 stroke-width: 2;
                 stroke-linecap: round;
@@ -52,35 +43,29 @@
                 animation: bond-flow 1s linear infinite;
                 fill: none;
             }
-
             .atom-glass {
                 fill: rgba(10, 10, 15, 0.7);
                 stroke-width: 1.5;
                 transition: all 0.3s ease;
                 cursor: pointer;
             }
-            
             .atom-glass:hover {
                 fill: rgba(20, 30, 40, 0.9);
                 stroke-width: 2;
                 filter: url(#bloom);
             }
-
             .atom-fe { stroke: #00f3ff; animation: atom-breathe 4s infinite; }
             .atom-be { stroke: #ff0055; animation: atom-breathe 5s infinite; }
-
             .atom-highlight {
                 fill: url(#glass-shine);
                 opacity: 0.4;
                 pointer-events: none;
             }
-
             .core-plate {
                 fill: rgba(255, 255, 255, 0.05);
                 stroke: #fff;
                 stroke-width: 0.5;
             }
-
             .txt-label {
                 font-family: 'JetBrains Mono', monospace;
                 font-size: 10px;
@@ -91,7 +76,6 @@
                 pointer-events: none;
                 text-shadow: 0 0 5px rgba(0,0,0,1);
             }
-
             .orbit-line {
                 fill: none;
                 stroke: #fff;
@@ -99,12 +83,9 @@
                 stroke-opacity: 0.1;
                 vector-effect: non-scaling-stroke;
             }
-
             .bg-hex { stroke: #1a1a1a; stroke-width: 1; fill: none; }
-            
             .particle { fill: #fff; animation: particle-drift 10s infinite linear; }
         </style>
-
         <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
             <feMerge>
@@ -112,65 +93,48 @@
                 <feMergeNode in="SourceGraphic"/>
             </feMerge>
         </filter>
-
         <linearGradient id="glass-shine" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#fff" stop-opacity="0.8"/>
             <stop offset="50%" stop-color="#fff" stop-opacity="0.1"/>
             <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
         </linearGradient>
-
         <radialGradient id="grad-glow-fe" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#00f3ff" stop-opacity="0.2"/>
             <stop offset="100%" stop-color="#00f3ff" stop-opacity="0"/>
         </radialGradient>
-
         <radialGradient id="grad-glow-be" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#ff0055" stop-opacity="0.2"/>
             <stop offset="100%" stop-color="#ff0055" stop-opacity="0"/>
         </radialGradient>
-
         <radialGradient id="vignette-rad" cx="50%" cy="50%" r="70%">
             <stop offset="0%" stop-color="#050505" stop-opacity="0"/>
             <stop offset="100%" stop-color="#000" stop-opacity="1"/>
         </radialGradient>
-
         <pattern id="hex-grid" width="40" height="40" patternUnits="userSpaceOnUse">
              <path d="M20 0 L40 10 L40 30 L20 40 L0 30 L0 10 Z" class="bg-hex"/>
         </pattern>
     </defs>
-
     <rect width="100%" height="100%" fill="#020202"/>
     <rect width="100%" height="100%" fill="url(#hex-grid)" opacity="0.15"/>
-    
     <circle cx="100" cy="500" r="1" class="particle" style="animation-delay: 0s" />
     <circle cx="700" cy="550" r="1.5" class="particle" style="animation-delay: 2s" />
     <circle cx="300" cy="580" r="1" class="particle" style="animation-delay: 4s" />
     <circle cx="600" cy="400" r="1" class="particle" style="animation-delay: 1s" />
-
     <rect width="100%" height="100%" fill="url(#vignette-rad)"/>
-
     <text x="40" y="40" font-family="'JetBrains Mono', monospace" fill="#fff" font-size="10" opacity="0.3" letter-spacing="2">SYS.ARCH_V4.0 // CONNECTED</text>
-
     <g class="scene">
-        
         <circle r="200" class="orbit-line" style="animation: sys-spin 60s linear infinite" stroke-dasharray="2 10" />
         <circle r="280" class="orbit-line" style="animation: sys-spin 40s linear infinite reverse; opacity: 0.05;" stroke-dasharray="20 20" />
-
         <line x1="0" y1="0" x2="130" y2="-90" class="bond-path" stroke="#00f3ff"/>
         <line x1="0" y1="0" x2="130" y2="-90" class="bond-energy" stroke="#00f3ff" />
-
         <line x1="0" y1="0" x2="-130" y2="-90" class="bond-path" stroke="#00f3ff"/>
         <line x1="0" y1="0" x2="-130" y2="-90" class="bond-energy" stroke="#00f3ff" style="animation-delay: 0.3s"/>
-
         <line x1="0" y1="0" x2="-160" y2="0" class="bond-path" stroke="#00f3ff"/>
         <line x1="0" y1="0" x2="-160" y2="0" class="bond-energy" stroke="#00f3ff" style="animation-delay: 0.6s"/>
-
         <line x1="0" y1="0" x2="130" y2="90" class="bond-path" stroke="#ff0055"/>
         <line x1="0" y1="0" x2="130" y2="90" class="bond-energy" stroke="#ff0055" style="animation-duration: 1.5s"/>
-
         <line x1="0" y1="0" x2="-130" y2="90" class="bond-path" stroke="#ff0055"/>
         <line x1="0" y1="0" x2="-130" y2="90" class="bond-energy" stroke="#ff0055" style="animation-duration: 1.5s; animation-delay: 0.5s"/>
-
         <g transform="translate(0, 15)">
             <path d="M-40,0 L0,20 L40,0 L0,-20 Z" class="core-plate" />
             <path d="M-40,-15 L0,5 L40,-15 L0,-35 Z" class="core-plate" style="fill: rgba(255,255,255,0.1)"/>
@@ -178,41 +142,35 @@
             <path d="M0,-50 L0,-80" stroke="#fff" stroke-width="1" stroke-dasharray="2 2" opacity="0.5"/>
             <circle cx="0" cy="-80" r="2" fill="#fff" filter="url(#bloom)"/>
         </g>
-
         <g transform="translate(130, -90)">
             <circle r="40" fill="url(#grad-glow-fe)" />
             <circle r="36" class="atom-glass atom-fe" />
             <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
             <text class="txt-label">REACT</text>
         </g>
-
         <g transform="translate(-130, -90)">
             <circle r="40" fill="url(#grad-glow-fe)" />
             <circle r="36" class="atom-glass atom-fe" />
             <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
             <text class="txt-label">JS/TS</text>
         </g>
-
         <g transform="translate(-160, 0)">
             <circle r="40" fill="url(#grad-glow-fe)" />
             <circle r="36" class="atom-glass atom-fe" />
             <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
             <text class="txt-label">GLSL</text>
         </g>
-
         <g transform="translate(130, 90)">
             <circle r="40" fill="url(#grad-glow-be)" />
             <circle r="36" class="atom-glass atom-be" />
             <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
             <text class="txt-label">NODE</text>
         </g>
-
         <g transform="translate(-130, 90)">
             <circle r="40" fill="url(#grad-glow-be)" />
             <circle r="36" class="atom-glass atom-be" />
             <path d="M-20,-25 Q0,-10 20,-25" class="atom-highlight" />
             <text class="txt-label">PY</text>
         </g>
-
     </g>
 </svg>
