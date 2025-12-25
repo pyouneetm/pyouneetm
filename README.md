@@ -3,7 +3,6 @@
 </div>
 
 <div id="view" align="center">
-    <!-- VIEWS COUNTER -->
     <img src="https://komarev.com/ghpvc/?username=pyouneetm&color=12100E&style=for-the-badge&label=VIEWS&abbreviated=true"/>
 
 <br/>
@@ -15,7 +14,6 @@
                 <img src="./assets/02_term_matrix.svg" width="100%" />
             </td>
             <td width="33%" valign="top">
-                <!-- STREAK STATS (From User Snippet) -->
                 <a href="https://github.com/pyouneetm">
                     <img src="http://github-readme-streak-stats.herokuapp.com?user=pyouneetm&exclude_days=Mon%2CTue%2CSat&theme=github-dark-dimmed&hide_border=true&bg_color=0D1117&stroke=EBEBEB00&date_format=j%20M%5B%20Y%5D&background=EB545400&excludeDaysLabel=EB545400" width="100%" />
                 </a>
