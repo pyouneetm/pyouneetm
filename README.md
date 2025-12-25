@@ -5,14 +5,6 @@
 <div id="view" align="center">
     <!-- VIEWS COUNTER -->
     <img src="https://komarev.com/ghpvc/?username=pyouneetm&color=12100E&style=for-the-badge&label=VIEWS&abbreviated=true"/>
-    
-    <br/>
-    
-    <!-- TYPING SVG -->
-    <a href="https://git.io/typing-svg">
-        <img src="https://readme-typing-svg.demolab.com?font=Rajdhani&weight=600&size=22&pause=1000&color=00F3FF&center=true&vCenter=true&width=700&lines=PUNEET MISHRA+Full+Stack+Developer%2C+Physics+Engine+Enthusiast%2C+and+Creative+Coder." alt="Typing SVG" />
-    </a>
-</div>
 
 <br/>
 
