@@ -42,10 +42,23 @@ graph TD
     Github -->|Repos| GitData(Portfolio)
 ```
 
-## ⚡ RECENT_FLUX_CAPACITY
 <div align="center">
-    <!-- Live Activity Graph -->
-    <img src="https://github-readme-activity-graph.vercel.app/graph?username=pyouneetm&bg_color=0D1117&color=00f3ff&line=ff0055&point=ffffff&area=true&hide_border=true" width="100%" />
+    <img src="./assets/05_iso_lab.svg" width="100%" />
+</div>
+
+<div align="center">
+    <table>
+        <tr>
+            <td width="50%">
+                <h3 align="center">MOLECULAR SKILLS</h3>
+                <img src="./assets/03_skill_reactor.svg" width="100%" />
+            </td>
+            <td width="50%">
+                <h3 align="center">NEURAL SYNAPSE</h3>
+                <img src="./assets/04_net_graph.svg" width="100%" />
+            </td>
+        </tr>
+    </table>
 </div>
 
 ## 📡 COMMAND CENTER (SOCIAL UPLINKS)
@@ -65,7 +78,7 @@ graph TD
 > *A high-velocity survival simulation leveraging verlet integration and separating axis theorem.*
 
 <details>
-<summary><b>[ ACCESS SOURCE KERNEL ]</b></summary>
+<summary><b> ACCESS SOURCE KERNEL </b></summary>
 
 ```javascript
 // PHYSICS INTEGRATION LOOP
