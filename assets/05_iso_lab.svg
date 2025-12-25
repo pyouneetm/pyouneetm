@@ -1,79 +1,56 @@
-<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="300" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;display=swap');
-
-            /* --- ANIMATIONS --- */
-            
             @keyframes hover-float {
                 0%, 100% { transform: translateY(0); }
                 50% { transform: translateY(-15px); }
             }
-
             @keyframes pulse-glow {
                 0%, 100% { filter: drop-shadow(0 0 2px currentColor); opacity: 0.8; }
                 50% { filter: drop-shadow(0 0 10px currentColor); opacity: 1; }
             }
-
             @keyframes spin-slow {
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
             }
-
             @keyframes pop-in {
                 0% { transform: scale(0); opacity: 0; }
                 60% { transform: scale(1.1); opacity: 1; }
                 100% { transform: scale(1); opacity: 1; }
             }
-
             @keyframes data-stream {
                 0% { stroke-dashoffset: 50; opacity: 0; }
                 50% { opacity: 1; }
                 100% { stroke-dashoffset: -50; opacity: 0; }
             }
-
-            /* --- STYLES --- */
-            
             .bg { fill: #050505; }
-            
-            /* Grid */
             .grid-floor {
                 stroke: url(#grad-floor);
                 stroke-width: 1;
             }
-
-            /* Items */
             .item-group {
                 cursor: pointer;
                 transition: transform 0.3s ease;
             }
             .item-group:hover { transform: scale(1.1) translateY(-10px); }
-
-            /* Specific Colors */
             .color-ai { color: #00f3ff; fill: #00f3ff; stroke: #00f3ff; }
             .color-cosmos { color: #bc13fe; fill: #bc13fe; stroke: #bc13fe; }
             .color-dash { color: #00ff9d; fill: #00ff9d; stroke: #00ff9d; }
             .color-sec { color: #ffae00; fill: #ffae00; stroke: #ffae00; }
             .color-ux { color: #ff0055; fill: #ff0055; stroke: #ff0055; }
-
-            /* Pedestals */
             .pedestal-top { fill: rgba(255,255,255,0.05); stroke: rgba(255,255,255,0.2); stroke-width: 1; }
             .pedestal-side { fill: rgba(0,0,0,0.5); stroke: rgba(255,255,255,0.1); stroke-width: 1; }
-            
-            /* Icons/Shapes */
             .icon-shape {
                 fill: rgba(0,0,0,0.8);
                 stroke-width: 2;
                 vector-effect: non-scaling-stroke;
             }
-            
             .holo-light {
                 fill: url(#grad-holo);
                 opacity: 0.3;
                 mix-blend-mode: screen;
             }
-
-            /* HUD Text */
             .label-tag {
                 font-family: 'JetBrains Mono', monospace;
                 font-size: 10px;
@@ -84,7 +61,6 @@
                 letter-spacing: 1px;
                 text-shadow: 0 2px 4px #000;
             }
-
             .header-main {
                 font-family: 'JetBrains Mono', monospace;
                 font-size: 14px;
@@ -93,84 +69,57 @@
                 text-anchor: middle;
                 letter-spacing: 4px;
             }
-
         </style>
-
-        <!-- GRADIENTS -->
         <linearGradient id="grad-floor" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2"/>
             <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
         </linearGradient>
-
         <linearGradient id="grad-holo" x1="0%" y1="100%" x2="0%" y2="0%">
             <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
             <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"/>
         </linearGradient>
-
         <filter id="bloom-effect" x="-50%" y="-50%" width="200%" height="200%">
             <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
             <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-
         <pattern id="grid-pat" width="40" height="40" patternUnits="userSpaceOnUse">
             <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#222" stroke-width="1"/>
         </pattern>
     </defs>
-
-    <!-- 1. SCENE BACKGROUND -->
     <rect width="100%" height="100%" class="bg"/>
     <rect width="100%" height="100%" fill="url(#grid-pat)" opacity="0.3"/>
-    
-    <!-- Perspective Floor -->
     <g transform="translate(400, 200)">
         <path d="M-600,300 L0,0 L600,300" class="grid-floor" opacity="0.3"/>
         <path d="M-300,300 L0,0 L300,300" class="grid-floor" opacity="0.3"/>
         <path d="M0,300 L0,0" class="grid-floor" opacity="0.5"/>
-        
-        <!-- Horizontal depth rings -->
         <ellipse cx="0" cy="150" rx="300" ry="80" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="10 10"/>
         <ellipse cx="0" cy="250" rx="400" ry="100" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="10 10"/>
     </g>
-
     <g transform="translate(400, 250)">
-        <!-- Pedestal -->
         <path d="M-40,10 L0,25 L40,10 L0,-5 Z" class="pedestal-top" />
         <path d="M-40,10 L0,25 L0,60 L-40,40 Z" class="pedestal-side" />
         <path d="M40,10 L0,25 L0,60 L40,40 Z" class="pedestal-side" />
-        
-        <!-- Hologram Beam -->
         <path d="M-30,10 L-50,-100 L50,-100 L30,10 Z" class="holo-light" fill="url(#grad-holo)" style="color: #00ff9d; fill: currentColor; opacity: 0.1;" />
-
-        <!-- Floating Dashboard (Main Item) -->
         <g class="item-group" style="animation: hover-float 6s ease-in-out infinite;">
-            <!-- Main Screen -->
             <rect x="-50" y="-100" width="100" height="60" rx="4" class="icon-shape color-dash" fill="rgba(0,20,10,0.8)" stroke="currentColor"/>
-            <!-- Data Lines -->
             <path d="M-40,-80 L-10,-80 M-40,-70 L20,-70 M-40,-60 L0,-60" stroke="#00ff9d" stroke-width="2" opacity="0.6"/>
-            <!-- Chart -->
             <path d="M10,-60 L20,-80 L30,-70 L40,-90" fill="none" stroke="#00ff9d" stroke-width="2" />
-            <!-- Label -->
             <text y="-115" class="label-tag color-dash">PRODUCTIVITY_DASH</text>
         </g>
     </g>
-
     <g transform="translate(180, 280)">
         <path d="M-30,8 L0,20 L30,8 L0,-4 Z" class="pedestal-top" />
         <path d="M-30,8 L0,20 L0,50 L-30,35 Z" class="pedestal-side" />
         <path d="M30,8 L0,20 L0,50 L30,35 Z" class="pedestal-side" />
-
         <g class="item-group" style="animation: hover-float 5s ease-in-out infinite 0.5s;">
-            <path d="M-25,-60 L0,-70 L25,-60 L0,-50 Z" class="icon-shape color-ai" stroke="currentColor"/> <!-- Top -->
+            <path d="M-25,-60 L0,-70 L25,-60 L0,-50 Z" class="icon-shape color-ai" stroke="currentColor"/> 
             <path d="M-25,-60 L0,-50 L0,-20 L-25,-30 Z" class="icon-shape color-ai" fill="rgba(0,20,30,0.9)" stroke="currentColor"/>
             <path d="M25,-60 L0,-50 L0,-20 L25,-30 Z" class="icon-shape color-ai" fill="rgba(0,20,30,0.8)" stroke="currentColor"/>
-            
             <path d="M-10,-40 L0,-35 L10,-40 M0,-35 L0,-25" stroke="#00f3ff" stroke-width="2"/>
             <circle cx="0" cy="-45" r="2" fill="#00f3ff" style="animation: pulse-glow 1s infinite"/>
-            
             <text y="-85" class="label-tag color-ai">OFFLINE_AI</text>
         </g>
     </g>
-
     <g transform="translate(100, 180)">
          <g class="item-group" style="animation: hover-float 7s ease-in-out infinite 1s;">
             <path d="M0,-40 C30,-40 30,-10 0,10 C-30,-10 -30,-40 0,-40 Z" class="icon-shape color-sec" stroke="currentColor" fill="rgba(30,20,0,0.8)"/>
@@ -179,42 +128,26 @@
             <circle cx="20" cy="-30" r="1" fill="#ffae00" style="animation: pulse-glow 2s infinite"/>
          </g>
     </g>
-
-
     <g transform="translate(620, 280)">
-        <!-- Pedestal -->
         <path d="M-30,8 L0,20 L30,8 L0,-4 Z" class="pedestal-top" />
         <path d="M-30,8 L0,20 L0,50 L-30,35 Z" class="pedestal-side" />
         <path d="M30,8 L0,20 L0,50 L30,35 Z" class="pedestal-side" />
-
-        <!-- COSMOS SPHERE -->
         <g class="item-group" style="animation: hover-float 5.5s ease-in-out infinite 0.2s;">
             <circle cy="-50" r="25" class="icon-shape color-cosmos" stroke="currentColor" fill="rgba(20,0,30,0.9)"/>
-            <!-- Rings -->
             <ellipse cy="-50" rx="35" ry="10" fill="none" stroke="#bc13fe" stroke-width="1" style="transform-origin: 0 -50px; animation: spin-slow 8s linear infinite"/>
             <ellipse cy="-50" rx="35" ry="10" fill="none" stroke="#bc13fe" stroke-width="1" style="transform-origin: 0 -50px; animation: spin-slow 12s linear infinite reverse; opacity: 0.5"/>
-            
             <text y="-90" class="label-tag color-cosmos">COSMOS_SCALE</text>
         </g>
     </g>
-
     <g transform="translate(700, 180)">
-        <!-- UX HEART/ORGANIC -->
         <g class="item-group" style="animation: hover-float 6.5s ease-in-out infinite 1.5s;">
             <path d="M0,-10 C-15,-25 -25,-10 0,10 C25,-10 15,-25 0,-10 Z" class="icon-shape color-ux" stroke="currentColor" fill="rgba(40,0,10,0.8)" transform="scale(1.5) translate(0,-20)"/>
             <text y="-65" class="label-tag color-ux">USER_FRIENDLY</text>
-            <!-- Soft Glow -->
             <circle cy="-30" r="15" fill="#ff0055" opacity="0.2" filter="url(#bloom-effect)"/>
         </g>
     </g>
-
-
-    <!-- 3. OVERLAY UI -->
     <text x="400" y="450" class="header-main">EXPERIMENTAL_LAB_ENV</text>
     <rect x="350" y="460" width="100" height="2" fill="#fff" opacity="0.3"/>
-    
-    <!-- Status Text -->
     <text x="30" y="40" font-family="'JetBrains Mono', monospace" fill="#00ff9d" font-size="12">LAB_STATUS: IDEATION_ACTIVE</text>
     <line x1="30" y1="50" x2="250" y2="50" stroke="#00ff9d" stroke-width="1" opacity="0.5"/>
-
 </svg>
