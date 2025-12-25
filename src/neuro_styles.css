@@ -11,14 +11,12 @@ body {
     overflow: hidden;
 }
 
-/* Double Helix Animation */
 .dna-loader {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate3d(-50%, -50%, 0);
 }
 
-/* Quantum Superposition Glitch */
 .quantum-state {
     position: relative;
     animation: heisenberg 2s infinite;
