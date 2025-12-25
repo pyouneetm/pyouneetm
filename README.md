@@ -2,7 +2,7 @@
     <img src="./assets/01_header_deck.svg" width="100%" />
 </div>
 
-<div id="view" align="center">
+<div id="view" align="right">
     <img src="https://komarev.com/ghpvc/?username=pyouneetm&color=12100E&style=for-the-badge&label=VIEWS&abbreviated=true"/>
 
 <br/>
