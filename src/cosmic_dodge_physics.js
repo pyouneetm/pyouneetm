@@ -1,5 +1,5 @@
 /**
- * COSMIC DODGE ENGINE V3.0 [PHYSICS CORE]
+ * COSMIC DODGE ENGINE 3.0.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1..1.1.1..1.1.1.1.1.1.1.1.1.1.1.1.1.1.....FUCKING.........1 [PHYSICS CORE-LORE]
  * Developer: Pyouneetm
  * * Implements verlet integration for particle physics and 
  * collision detection using Separating Axis Theorem (SAT).
@@ -13,7 +13,7 @@ class PhysicsEngine {
         this.gravity = 9.81; // m/s^2 simulation
         this.friction = 0.98; // Atmospheric drag
         
-        // Audio Synthesis (Tone.js integration) for Dopamine Release
+        // Audio Synthesis (Tone.js integration) for Dopamine Release cause i love addiction i think
         this.synth = new Tone.PolySynth(Tone.FMSynth).toDestination();
     }
 
@@ -30,7 +30,7 @@ class PhysicsEngine {
             pos: { x: this.canvas.width / 2, y: this.canvas.height - 100 },
             vel: { x: 0, y: 0 },
             mass: 10,
-            color: '#00f3ff', // Neon Cyan
+            color: '#00f3ff',
         };
         this.entities.push(this.player);
     }
