@@ -117,7 +117,7 @@
             <path d="M25,-60 L0,-50 L0,-20 L25,-30 Z" class="icon-shape color-ai" fill="rgba(0,20,30,0.8)" stroke="currentColor"/>
             <path d="M-10,-40 L0,-35 L10,-40 M0,-35 L0,-25" stroke="#00f3ff" stroke-width="2"/>
             <circle cx="0" cy="-45" r="2" fill="#00f3ff" style="animation: pulse-glow 1s infinite"/>
-            <text y="-85" class="label-tag color-ai">COGNATIVE AI (Completed)</text>
+            <text y="-85" class="label-tag color-ai">COGNITIVE INTELLIGENCE (Completed)</text>
         </g>
     </g>
     <g transform="translate(100, 180)">
